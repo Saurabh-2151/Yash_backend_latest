@@ -19,10 +19,12 @@ E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\LoginRespon
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Expense.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\repository\EmployeeTrackingRepository.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Designation.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\exception\BaseException.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Permission.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\controller\DebugController.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\SupportTicketMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\repository\EmployeePunchRepository.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\exception\GlobalExceptionHandler.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\SettingsDto.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\CaseDto.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\FormMapper.java
@@ -42,6 +44,7 @@ E:\Unolo\attendance-backend\src\main\java\com\company\attendance\repository\Orde
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\service\SettingsService.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\controller\PolicyController.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\service\AnnouncementService.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\config\DatabaseMigration.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Shift.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\FormDto.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\GeofenceZone.java
@@ -70,6 +73,7 @@ E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Organiza
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\ClientMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\controller\EmployeePunchController.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\controller\OrganizationController.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\exception\ResourceNotFoundException.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\security\JwtTokenProvider.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\repository\SettingsRepository.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\config\AdminBootstrap.java
@@ -85,6 +89,7 @@ E:\Unolo\attendance-backend\src\main\java\com\company\attendance\service\Holiday
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\HolidayMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\controller\BulkAttendanceController.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Employee.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\exception\BadRequestException.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\TaskMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\EmployeeMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\ShiftDto.java
@@ -103,6 +108,7 @@ E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\SupportT
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\service\TeamService.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\RoleDto.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\EmployeeDto.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\dto\BaseDto.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Department.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\AttendanceMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\OrderMapper.java

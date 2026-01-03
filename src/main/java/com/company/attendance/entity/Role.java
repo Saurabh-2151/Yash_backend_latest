@@ -37,6 +37,10 @@ public class Role {
     )
     private List<Permission> permissions;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<Employee> employees;
 

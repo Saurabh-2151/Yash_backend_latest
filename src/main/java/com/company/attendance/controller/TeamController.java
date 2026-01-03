@@ -1,52 +1,69 @@
 package com.company.attendance.controller;
 
 import com.company.attendance.dto.TeamDto;
-import com.company.attendance.entity.Team;
-import com.company.attendance.mapper.TeamMapper;
+import com.company.attendance.dto.EmployeeDto;
 import com.company.attendance.service.TeamService;
+import com.company.attendance.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/teams")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class TeamController {
     private final TeamService teamService;
-    private final TeamMapper teamMapper;
+    private final EmployeeService employeeService;
 
     @GetMapping
     public ResponseEntity<List<TeamDto>> listTeams() {
-        var teams = teamService.findAll();
-        var dtos = teams.stream().map(teamMapper::toDto).collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+        List<TeamDto> teams = teamService.findAll();
+        return ResponseEntity.ok(teams);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TeamDto> getTeam(@PathVariable Long id) {
-        return ResponseEntity.ok(teamMapper.toDto(teamService.getById(id)));
+        TeamDto team = teamService.getById(id);
+        return ResponseEntity.ok(team);
     }
 
     @PostMapping
     public ResponseEntity<TeamDto> createTeam(@Valid @RequestBody TeamDto dto) {
-        Team team = teamService.save(teamMapper.toEntity(dto));
-        return ResponseEntity.ok(teamMapper.toDto(team));
+        TeamDto createdTeam = teamService.create(dto);
+        return ResponseEntity.ok(createdTeam);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TeamDto> updateTeam(@PathVariable Long id, @RequestBody TeamDto dto) {
-        Team t = teamService.getById(id);
-        Team saved = teamService.save(teamMapper.toEntity(dto));
-        return ResponseEntity.ok(teamMapper.toDto(saved));
+    public ResponseEntity<TeamDto> updateTeam(@PathVariable Long id, @Valid @RequestBody TeamDto dto) {
+        TeamDto updatedTeam = teamService.update(id, dto);
+        return ResponseEntity.ok(updatedTeam);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTeam(@PathVariable Long id) {
         teamService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/assign-lead")
+    public ResponseEntity<Void> assignTeamLead(@PathVariable Long id, @RequestBody Long teamLeadId) {
+        teamService.assignTeamLead(id, teamLeadId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/assign-members")
+    public ResponseEntity<Void> assignTeamMembers(@PathVariable Long id, @RequestBody List<Long> memberIds) {
+        teamService.assignTeamMembers(id, memberIds);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/members")
+    public ResponseEntity<List<EmployeeDto>> getTeamMembers(@PathVariable Long id) {
+        List<EmployeeDto> members = teamService.getTeamMembers(id);
+        return ResponseEntity.ok(members);
     }
 }
 

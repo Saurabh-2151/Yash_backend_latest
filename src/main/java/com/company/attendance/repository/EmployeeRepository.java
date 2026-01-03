@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByEmail(String email);
     boolean existsByEmail(String email);
+    Optional<Employee> findByPhone(String phone);
 
     // Methods used by EmployeeService
     Optional<Employee> findByUserId(String userId);

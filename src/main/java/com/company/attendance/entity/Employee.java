@@ -6,6 +6,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "employees")
@@ -77,6 +79,10 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shift_id")
     private Shift shift;
+
+    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<Team> teams = new HashSet<>();
 
     private BigDecimal locationLat;
     private BigDecimal locationLng;

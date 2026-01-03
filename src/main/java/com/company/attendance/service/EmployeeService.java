@@ -38,6 +38,14 @@ public class EmployeeService {
         return employeeRepository.findByEmployeeId(employeeId);
     }
 
+    public Optional<Employee> findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
+
+    public Optional<Employee> findByPhone(String phone) {
+        return employeeRepository.findByPhone(phone);
+    }
+
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
@@ -52,12 +60,100 @@ public class EmployeeService {
 
     @Transactional
     public Employee update(Long id, Employee updated) {
+        System.out.println("=== EMPLOYEE UPDATE DEBUG ===");
+        System.out.println("Updating employee ID: " + id);
+        System.out.println("Updated data: " + updated);
+        
         Employee existing = findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
-        updated.setId(id);
-        updated.setCreatedAt(existing.getCreatedAt());
-        updated.setUpdatedAt(LocalDateTime.now());
-        return employeeRepository.save(updated);
+        
+        System.out.println("Existing data: " + existing);
+        
+        // Update only the fields that exist in the Employee entity
+        // IMPORTANT: Never update created_at and created_by during update
+        if (updated.getFirstName() != null && !updated.getFirstName().equals(existing.getFirstName())) {
+            System.out.println("Updating firstName from '" + existing.getFirstName() + "' to '" + updated.getFirstName() + "'");
+            existing.setFirstName(updated.getFirstName());
+        }
+        if (updated.getLastName() != null && !updated.getLastName().equals(existing.getLastName())) {
+            System.out.println("Updating lastName from '" + existing.getLastName() + "' to '" + updated.getLastName() + "'");
+            existing.setLastName(updated.getLastName());
+        }
+        if (updated.getEmail() != null && !updated.getEmail().equals(existing.getEmail())) {
+            System.out.println("Updating email from '" + existing.getEmail() + "' to '" + updated.getEmail() + "'");
+            existing.setEmail(updated.getEmail());
+        }
+        if (updated.getPhone() != null && !updated.getPhone().equals(existing.getPhone())) {
+            System.out.println("Updating phone from '" + existing.getPhone() + "' to '" + updated.getPhone() + "'");
+            existing.setPhone(updated.getPhone());
+        }
+        if (updated.getEmployeeId() != null && !updated.getEmployeeId().equals(existing.getEmployeeId())) {
+            existing.setEmployeeId(updated.getEmployeeId());
+        }
+        if (updated.getUserId() != null && !updated.getUserId().equals(existing.getUserId())) {
+            existing.setUserId(updated.getUserId());
+        }
+        if (updated.getEmployeeCode() != null && !updated.getEmployeeCode().equals(existing.getEmployeeCode())) {
+            existing.setEmployeeCode(updated.getEmployeeCode());
+        }
+        if (updated.getRole() != null && !updated.getRole().equals(existing.getRole())) {
+            existing.setRole(updated.getRole());
+        }
+        if (updated.getReportingManager() != null && !updated.getReportingManager().equals(existing.getReportingManager())) {
+            existing.setReportingManager(updated.getReportingManager());
+        }
+        if (updated.getTeam() != null && !updated.getTeam().equals(existing.getTeam())) {
+            existing.setTeam(updated.getTeam());
+        }
+        if (updated.getDepartment() != null && !updated.getDepartment().equals(existing.getDepartment())) {
+            existing.setDepartment(updated.getDepartment());
+        }
+        if (updated.getDesignation() != null && !updated.getDesignation().equals(existing.getDesignation())) {
+            existing.setDesignation(updated.getDesignation());
+        }
+        if (updated.getStatus() != null && !updated.getStatus().equals(existing.getStatus())) {
+            existing.setStatus(updated.getStatus());
+        }
+        if (updated.getAttendanceAllowed() != null && !updated.getAttendanceAllowed().equals(existing.getAttendanceAllowed())) {
+            existing.setAttendanceAllowed(updated.getAttendanceAllowed());
+        }
+        if (updated.getHiredAt() != null && !updated.getHiredAt().equals(existing.getHiredAt())) {
+            existing.setHiredAt(updated.getHiredAt());
+        }
+        if (updated.getTerminationDate() != null && !updated.getTerminationDate().equals(existing.getTerminationDate())) {
+            existing.setTerminationDate(updated.getTerminationDate());
+        }
+        if (updated.getPasswordHash() != null && !updated.getPasswordHash().equals(existing.getPasswordHash())) {
+            existing.setPasswordHash(updated.getPasswordHash());
+        }
+        if (updated.getOrganization() != null && !updated.getOrganization().equals(existing.getOrganization())) {
+            existing.setOrganization(updated.getOrganization());
+        }
+        if (updated.getShift() != null && !updated.getShift().equals(existing.getShift())) {
+            existing.setShift(updated.getShift());
+        }
+        if (updated.getLocationLat() != null && !updated.getLocationLat().equals(existing.getLocationLat())) {
+            existing.setLocationLat(updated.getLocationLat());
+        }
+        if (updated.getLocationLng() != null && !updated.getLocationLng().equals(existing.getLocationLng())) {
+            existing.setLocationLng(updated.getLocationLng());
+        }
+        if (updated.getSubadminId() != null && !updated.getSubadminId().equals(existing.getSubadminId())) {
+            existing.setSubadminId(updated.getSubadminId());
+        }
+        if (updated.getProfileImageUrl() != null && !updated.getProfileImageUrl().equals(existing.getProfileImageUrl())) {
+            existing.setProfileImageUrl(updated.getProfileImageUrl());
+        }
+        
+        // IMPORTANT: Only update updated_at, never touch created_at and created_by
+        existing.setUpdatedAt(LocalDateTime.now());
+        
+        System.out.println("Final existing data before save: " + existing);
+        Employee saved = employeeRepository.save(existing);
+        System.out.println("Saved data: " + saved);
+        System.out.println("=== END EMPLOYEE UPDATE DEBUG ===");
+        
+        return saved;
     }
 
     public void delete(Long id) {

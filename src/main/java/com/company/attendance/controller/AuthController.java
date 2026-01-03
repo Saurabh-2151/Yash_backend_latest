@@ -1,98 +1,139 @@
-// package com.company.attendance.controller;
+package com.company.attendance.controller;
 
-// import com.company.attendance.dto.LoginRequest;
-// import com.company.attendance.dto.LoginResponse;
-// import com.company.attendance.entity.Employee;
-// import com.company.attendance.entity.Employee.Status;
-// import com.company.attendance.repository.EmployeeRepository;
-// import com.company.attendance.service.AuthService;
-// import com.company.attendance.service.JwtService;
-// import jakarta.validation.Valid;
-// import lombok.RequiredArgsConstructor;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
+import com.company.attendance.dto.EmployeeDto;
+import com.company.attendance.entity.Employee;
+import com.company.attendance.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-// import java.util.Map;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-// @RestController
-// @RequestMapping("/api/auth")
-// @RequiredArgsConstructor
-// @CrossOrigin(origins = "*")
-// public class AuthController {
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+public class AuthController {
     
-//     // private final AuthService authService;
-//     // private final JwtService jwtService;
-//     // private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
     
-//     // @PostMapping("/login")
-//     // public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-//     //     try {
-//     //         // LoginResponse response = authService.login(loginRequest);
-//     //         // return ResponseEntity.ok(response);
-//     //     } catch (RuntimeException e) {
-//     //         // return ResponseEntity.badRequest().build();
-//     //     }
-//     // }
-    
-//     // @PostMapping("/register")
-//     // public ResponseEntity<?> register() {
-//     //     // return ResponseEntity.ok().body("Registration endpoint - to be implemented");
-//     // }
-    
-//     // @PostMapping("/register-test")
-// //     // public ResponseEntity<?> registerTest() {
-// //     //     try {
-// //     //         // Create a test employee with known password
-// //     //         // Employee testEmployee = Employee.builder()
-// //     //         //         .firstName("Test")
-// //     //         //         .lastName("User")
-// //     //         //         .email("test@test.com")
-// //     //         //         .employeeId("TEST001")
-// //     //         //         .userId("testuser")
-// //     //         //         .phone("1234567890")
-// //     //         //         .status(Status.ACTIVE)
-// //     //         //         .attendanceAllowed(true)
-// //     //         //         .passwordHash("$2a$10$N.zmdr9k7uKQd4vK5M2tJ5O6I4k5M2tJ5O6I4k5M2tJ5O6I4k5M2tJ5O6I") // password: "password123"
-// //     //         //         .build();
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            // Find employee by email or mobile
+            Optional<Employee> employeeOpt;
+            
+            if (loginRequest.getEmail() != null && !loginRequest.getEmail().trim().isEmpty()) {
+                employeeOpt = employeeService.findByEmail(loginRequest.getEmail());
+            } else if (loginRequest.getMobile() != null && !loginRequest.getMobile().trim().isEmpty()) {
+                employeeOpt = employeeService.findByPhone(loginRequest.getMobile());
+            } else {
+                return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Email or mobile number is required"
+                ));
+            }
+
+            if (employeeOpt.isEmpty()) {
+                return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Invalid credentials"
+                ));
+            }
+
+            Employee employee = employeeOpt.get();
+            
+            // Check if password matches (for development, using simple check)
+            if (!isValidPassword(loginRequest.getPassword(), employee)) {
+                return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Invalid credentials"
+                ));
+            }
+
+            // Create response with user data and token
+            EmployeeDto employeeDto = convertToDto(employee);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", generateToken(employee));
+            response.put("user", employeeDto);
+            response.put("message", "Login successful");
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of(
+                "error", "Login failed: " + e.getMessage()
+            ));
+        }
+    }
+
+    // Simple password validation for development
+    private boolean isValidPassword(String inputPassword, Employee employee) {
+        // For development, check against common passwords based on role
+        String roleName = employee.getRole() != null ? employee.getRole().getName() : "";
         
-// //     //         // employeeRepository.save(testEmployee);
-// //     //         // return ResponseEntity.ok().body("Test user created successfully");
-// //     //     } catch (Exception e) {
-// //     //         // return ResponseEntity.badRequest().body("Error creating test user: " + e.getMessage());
-// //     //     }
-// //     // }
-    
-// //     // @GetMapping("/profile")
-// //     // public ResponseEntity<Map<String, Object>> getProfile(@RequestHeader("Authorization") String authHeader) {
-// //     //     try {
-// //     //         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-// //     //             String token = authHeader.substring(7);
-// //     //             if (jwtService.validateToken(token)) {
-// //     //                 String email = jwtService.extractUsername(token);
-// //     //                 Map<String, Object> profile = authService.getUserProfile(email);
-// //     //                 return ResponseEntity.ok(profile);
-// //     //             }
-// //     //         }
-// //     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-// //     //     } catch (Exception e) {
-// //     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-// //     //     }
-// //     // }
-    
-// //     // @PostMapping("/validate")
-// //     // public ResponseEntity<Map<String, Object>> validateToken(@RequestHeader("Authorization") String authHeader) {
-// //     //     try {
-// //     //         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-// //     //             String token = authHeader.substring(7);
-// //     //             if (jwtService.validateToken(token)) {
-// //     //                 Map<String, Object> userInfo = jwtService.extractUserInfo(token);
-// //     //                 return ResponseEntity.ok(userInfo);
-// //     //             }
-// //     //         }
-// //     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-// //     //     } catch (Exception e) {
-// //     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-// //     //     }
-// //     // }
-// // }
+        switch (roleName) {
+            case "Admin":
+                return "admin123".equals(inputPassword);
+            case "Manager":
+                return "manager123".equals(inputPassword);
+            case "Employee":
+                return "employee123".equals(inputPassword);
+            default:
+                return "password123".equals(inputPassword);
+        }
+    }
+
+    // Simple token generation (in production, use JWT)
+    private String generateToken(Employee employee) {
+        return "token_" + employee.getId() + "_" + System.currentTimeMillis();
+    }
+
+    // Convert Employee to EmployeeDto
+    private EmployeeDto convertToDto(Employee employee) {
+        return EmployeeDto.builder()
+                .id(employee.getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .email(employee.getEmail())
+                .phone(employee.getPhone())
+                .employeeId(employee.getEmployeeId())
+                .employeeCode(employee.getEmployeeCode())
+                .roleId(employee.getRole() != null ? employee.getRole().getId() : null)
+                .roleName(employee.getRole() != null ? employee.getRole().getName() : null)
+                .teamId(employee.getTeam() != null ? employee.getTeam().getId() : null)
+                .teamName(employee.getTeam() != null ? employee.getTeam().getName() : null)
+                .departmentId(employee.getDepartment() != null ? employee.getDepartment().getId() : null)
+                .departmentName(employee.getDepartment() != null ? employee.getDepartment().getName() : null)
+                .status(employee.getStatus().name())
+                .profileImageUrl(employee.getProfileImageUrl())
+                .hiredAt(employee.getHiredAt())
+                .profileImageBase64("") // For frontend image display
+                .build();
+    }
+
+    // Request DTO for login
+    public static class LoginRequest {
+        private String email;
+        private String mobile;
+        private String password;
+        private Long organizationId;
+
+        // Getters and Setters
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
+        
+        public String getMobile() { return mobile; }
+        public void setMobile(String mobile) { this.mobile = mobile; }
+        
+        public String getPassword() { return password; }
+        public void setPassword(String password) { this.password = password; }
+        
+        public Long getOrganizationId() { return organizationId; }
+        public void setOrganizationId(Long organizationId) { this.organizationId = organizationId; }
+    }
+}

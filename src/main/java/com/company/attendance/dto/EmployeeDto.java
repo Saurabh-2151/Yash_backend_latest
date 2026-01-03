@@ -49,4 +49,5 @@ public class EmployeeDto {
     private LocalDateTime updatedAt;
     private String createdBy;
     private String updatedBy;
+    private String profileImageBase64; // For frontend image display
 }

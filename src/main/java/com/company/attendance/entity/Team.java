@@ -3,6 +3,8 @@ package com.company.attendance.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "teams")
@@ -32,8 +34,22 @@ public class Team {
     @JoinColumn(name = "team_lead_id")
     private Employee teamLead;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    private List<Employee> employees;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_team_id")
+    private Team parentTeam;
+
+    @OneToMany(mappedBy = "parentTeam", cascade = CascadeType.ALL)
+    @Builder.Default
+    private Set<Team> subTeams = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "team_members",
+        joinColumns = @JoinColumn(name = "team_id"),
+        inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    @Builder.Default
+    private Set<Employee> members = new HashSet<>();
 
     // Explicit getters used by TestController (defensive if Lombok is not processed)
 

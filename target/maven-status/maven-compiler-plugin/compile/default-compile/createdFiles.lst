@@ -1,8 +1,10 @@
+com\company\attendance\exception\BaseException.class
 com\company\attendance\mapper\OrderMapper.class
 com\company\attendance\mapper\PermissionMapper.class
 com\company\attendance\repository\CaseDocumentRepository.class
 com\company\attendance\mapper\CaseDocumentMapperImpl.class
 com\company\attendance\entity\SupportTicket$SupportTicketBuilder.class
+com\company\attendance\controller\AuthController$LoginRequest.class
 com\company\attendance\controller\ReportsController.class
 com\company\attendance\mapper\PolicyMapperImpl.class
 com\company\attendance\service\FormService.class
@@ -20,6 +22,7 @@ com\company\attendance\service\CaseService.class
 com\company\attendance\mapper\LeaveRequestMapper.class
 com\company\attendance\controller\CaseDocumentController.class
 com\company\attendance\dto\LeaveRequestDto.class
+com\company\attendance\dto\OrganizationDto$OrganizationDtoBuilderImpl.class
 com\company\attendance\mapper\DesignationMapperImpl.class
 com\company\attendance\controller\TestController.class
 com\company\attendance\repository\AnnouncementRepository.class
@@ -36,6 +39,7 @@ com\company\attendance\mapper\OrganizationMapperImpl.class
 com\company\attendance\service\CaseDocumentService.class
 com\company\attendance\entity\Expense$ExpenseBuilder.class
 com\company\attendance\mapper\LeaveRequestMapperImpl.class
+com\company\attendance\config\DatabaseMigration.class
 com\company\attendance\repository\ExpenseRepository.class
 com\company\attendance\entity\GeofenceZone$GeofenceZoneBuilder.class
 com\company\attendance\dto\ShiftDto$ShiftDtoBuilder.class
@@ -43,6 +47,7 @@ com\company\attendance\entity\Case$CaseBuilder.class
 com\company\attendance\repository\CaseRepository.class
 com\company\attendance\repository\OrganizationRepository.class
 com\company\attendance\dto\AnnouncementDto.class
+com\company\attendance\exception\ResourceNotFoundException.class
 com\company\attendance\controller\ClientController.class
 com\company\attendance\mapper\ClientMapperImpl.class
 com\company\attendance\mapper\OrganizationMapper.class
@@ -50,6 +55,7 @@ com\company\attendance\service\EmployeeService.class
 com\company\attendance\entity\Attendance$Status.class
 com\company\attendance\entity\Permission$PermissionBuilder.class
 com\company\attendance\mapper\HolidayMapper.class
+com\company\attendance\service\OrganizationService.class
 com\company\attendance\entity\Case$Priority.class
 com\company\attendance\entity\LeaveRequest$Status.class
 com\company\attendance\controller\LeaveRequestController.class
@@ -74,12 +80,14 @@ com\company\attendance\dto\EmployeeDto.class
 com\company\attendance\mapper\ShiftMapperImpl.class
 com\company\attendance\mapper\SettingsMapperImpl.class
 com\company\attendance\repository\SettingsRepository.class
+com\company\attendance\controller\DepartmentController.class
 com\company\attendance\mapper\DepartmentMapperImpl.class
 com\company\attendance\mapper\CaseMapper.class
 com\company\attendance\dto\ShiftDto.class
 com\company\attendance\dto\SettingDto.class
 com\company\attendance\dto\TeamDto.class
 com\company\attendance\mapper\DepartmentMapper.class
+com\company\attendance\controller\OrganizationController.class
 com\company\attendance\config\CorsConfig.class
 com\company\attendance\entity\LeaveRequest$LeaveRequestBuilder.class
 com\company\attendance\repository\EmployeePunchRepository.class
@@ -120,7 +128,10 @@ com\company\attendance\entity\Task.class
 com\company\attendance\controller\TeamController.class
 com\company\attendance\entity\GeofenceZone.class
 com\company\attendance\entity\Employee$Status.class
+com\company\attendance\controller\AuthController.class
 com\company\attendance\mapper\CaseMapperImpl.class
+com\company\attendance\dto\BaseDto.class
+com\company\attendance\exception\GlobalExceptionHandler.class
 com\company\attendance\dto\CaseDto.class
 com\company\attendance\controller\EmployeeController.class
 com\company\attendance\dto\RoleDto$RoleDtoBuilder.class
@@ -157,6 +168,7 @@ com\company\attendance\mapper\TaskMapper.class
 com\company\attendance\repository\ShiftRepository.class
 com\company\attendance\entity\Team.class
 com\company\attendance\dto\PermissionDto$PermissionDtoBuilder.class
+com\company\attendance\controller\DesignationController.class
 com\company\attendance\repository\DesignationRepository.class
 com\company\attendance\entity\Designation.class
 com\company\attendance\entity\Team$TeamBuilder.class
@@ -164,6 +176,7 @@ com\company\attendance\mapper\ClientMapper.class
 com\company\attendance\entity\Form$FormBuilder.class
 com\company\attendance\controller\CaseController.class
 com\company\attendance\entity\Holiday.class
+com\company\attendance\exception\BadRequestException.class
 com\company\attendance\mapper\TeamMapperImpl.class
 com\company\attendance\dto\EmployeePunchDto.class
 com\company\attendance\mapper\HolidayMapperImpl.class
@@ -180,6 +193,7 @@ com\company\attendance\security\JwtTokenProvider.class
 com\company\attendance\mapper\OrderMapperImpl.class
 com\company\attendance\mapper\SettingMapper.class
 com\company\attendance\entity\Expense.class
+com\company\attendance\dto\TeamDto$TeamDtoBuilder.class
 com\company\attendance\entity\Form.class
 com\company\attendance\security\JwtAuthenticationFilter.class
 com\company\attendance\mapper\RoleMapper.class
@@ -190,6 +204,7 @@ com\company\attendance\mapper\SupportTicketMapperImpl.class
 com\company\attendance\mapper\EmployeeMapperImpl.class
 com\company\attendance\entity\Setting$SettingBuilder.class
 com\company\attendance\controller\CaseDocumentController$1.class
+com\company\attendance\dto\BaseDto$BaseDtoBuilderImpl.class
 com\company\attendance\service\ReportExportService.class
 com\company\attendance\entity\SupportTicket.class
 com\company\attendance\mapper\AnnouncementMapperImpl.class
@@ -198,6 +213,7 @@ com\company\attendance\config\AdminBootstrap.class
 com\company\attendance\repository\OrderRepository.class
 com\company\attendance\entity\Announcement$AnnouncementBuilder.class
 com\company\attendance\entity\EmployeePunch$EmployeePunchBuilder.class
+com\company\attendance\service\DesignationService.class
 com\company\attendance\dto\DesignationDto$DesignationDtoBuilder.class
 com\company\attendance\service\JwtService.class
 com\company\attendance\entity\Settings$SettingsBuilder.class
@@ -210,6 +226,7 @@ com\company\attendance\repository\EmployeeTrackingRepository.class
 com\company\attendance\entity\Organization$OrganizationBuilder.class
 com\company\attendance\AttendanceApplication.class
 com\company\attendance\controller\FormController.class
+com\company\attendance\dto\BaseDto$BaseDtoBuilder.class
 com\company\attendance\dto\SupportTicketDto.class
 com\company\attendance\repository\GeofenceZoneRepository.class
 com\company\attendance\mapper\SupportTicketMapper.class
