@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:57+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:55+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class AttendanceMapperImpl implements AttendanceMapper {
@@ -26,18 +26,18 @@ public class AttendanceMapperImpl implements AttendanceMapper {
         if ( attendance.getStatus() != null ) {
             attendanceDto.setStatus( attendance.getStatus().name() );
         }
-        attendanceDto.setId( attendance.getId() );
         attendanceDto.setDate( attendance.getDate() );
-        attendanceDto.setPunchInTime( attendance.getPunchInTime() );
-        attendanceDto.setPunchOutTime( attendance.getPunchOutTime() );
+        attendanceDto.setDeviceInfo( attendance.getDeviceInfo() );
+        attendanceDto.setId( attendance.getId() );
         attendanceDto.setInLocationLat( attendance.getInLocationLat() );
         attendanceDto.setInLocationLng( attendance.getInLocationLng() );
-        attendanceDto.setOutLocationLat( attendance.getOutLocationLat() );
-        attendanceDto.setOutLocationLng( attendance.getOutLocationLng() );
-        attendanceDto.setNote( attendance.getNote() );
-        attendanceDto.setDeviceInfo( attendance.getDeviceInfo() );
         attendanceDto.setIsLunchIn( attendance.getIsLunchIn() );
         attendanceDto.setIsLunchOut( attendance.getIsLunchOut() );
+        attendanceDto.setNote( attendance.getNote() );
+        attendanceDto.setOutLocationLat( attendance.getOutLocationLat() );
+        attendanceDto.setOutLocationLng( attendance.getOutLocationLng() );
+        attendanceDto.setPunchInTime( attendance.getPunchInTime() );
+        attendanceDto.setPunchOutTime( attendance.getPunchOutTime() );
 
         return attendanceDto;
     }
@@ -51,19 +51,19 @@ public class AttendanceMapperImpl implements AttendanceMapper {
         Attendance.AttendanceBuilder attendance = Attendance.builder();
 
         attendance.date( dto.getDate() );
-        attendance.punchInTime( dto.getPunchInTime() );
-        attendance.punchOutTime( dto.getPunchOutTime() );
+        attendance.deviceInfo( dto.getDeviceInfo() );
         attendance.inLocationLat( dto.getInLocationLat() );
         attendance.inLocationLng( dto.getInLocationLng() );
+        attendance.isLunchIn( dto.getIsLunchIn() );
+        attendance.isLunchOut( dto.getIsLunchOut() );
+        attendance.note( dto.getNote() );
         attendance.outLocationLat( dto.getOutLocationLat() );
         attendance.outLocationLng( dto.getOutLocationLng() );
+        attendance.punchInTime( dto.getPunchInTime() );
+        attendance.punchOutTime( dto.getPunchOutTime() );
         if ( dto.getStatus() != null ) {
             attendance.status( Enum.valueOf( Attendance.Status.class, dto.getStatus() ) );
         }
-        attendance.note( dto.getNote() );
-        attendance.deviceInfo( dto.getDeviceInfo() );
-        attendance.isLunchIn( dto.getIsLunchIn() );
-        attendance.isLunchOut( dto.getIsLunchOut() );
 
         return attendance.build();
     }
@@ -75,22 +75,22 @@ public class AttendanceMapperImpl implements AttendanceMapper {
         }
 
         attendance.setDate( dto.getDate() );
-        attendance.setPunchInTime( dto.getPunchInTime() );
-        attendance.setPunchOutTime( dto.getPunchOutTime() );
+        attendance.setDeviceInfo( dto.getDeviceInfo() );
         attendance.setInLocationLat( dto.getInLocationLat() );
         attendance.setInLocationLng( dto.getInLocationLng() );
+        attendance.setIsLunchIn( dto.getIsLunchIn() );
+        attendance.setIsLunchOut( dto.getIsLunchOut() );
+        attendance.setNote( dto.getNote() );
         attendance.setOutLocationLat( dto.getOutLocationLat() );
         attendance.setOutLocationLng( dto.getOutLocationLng() );
+        attendance.setPunchInTime( dto.getPunchInTime() );
+        attendance.setPunchOutTime( dto.getPunchOutTime() );
         if ( dto.getStatus() != null ) {
             attendance.setStatus( Enum.valueOf( Attendance.Status.class, dto.getStatus() ) );
         }
         else {
             attendance.setStatus( null );
         }
-        attendance.setNote( dto.getNote() );
-        attendance.setDeviceInfo( dto.getDeviceInfo() );
-        attendance.setIsLunchIn( dto.getIsLunchIn() );
-        attendance.setIsLunchOut( dto.getIsLunchOut() );
     }
 
     private Long attendanceEmployeeId(Attendance attendance) {

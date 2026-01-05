@@ -54,6 +54,7 @@ E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Settings
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\mapper\ShiftMapper.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\repository\AttendanceRepository.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\AttendanceApplication.java
+E:\Unolo\attendance-backend\src\main\java\com\company\attendance\config\StaticResourceConfig.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\controller\OrderController.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Role.java
 E:\Unolo\attendance-backend\src\main\java\com\company\attendance\entity\Client.java

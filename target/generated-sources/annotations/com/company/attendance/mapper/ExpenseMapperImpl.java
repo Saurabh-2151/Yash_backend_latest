@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:56+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:45+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class ExpenseMapperImpl implements ExpenseMapper {
@@ -21,12 +21,12 @@ public class ExpenseMapperImpl implements ExpenseMapper {
 
         ExpenseDto expenseDto = new ExpenseDto();
 
-        expenseDto.setId( o.getId() );
-        expenseDto.setEmployeeId( o.getEmployeeId() );
         expenseDto.setAmount( o.getAmount() );
-        expenseDto.setCategory( o.getCategory() );
-        expenseDto.setReceiptUrl( o.getReceiptUrl() );
         expenseDto.setApprovedBy( o.getApprovedBy() );
+        expenseDto.setCategory( o.getCategory() );
+        expenseDto.setEmployeeId( o.getEmployeeId() );
+        expenseDto.setId( o.getId() );
+        expenseDto.setReceiptUrl( o.getReceiptUrl() );
         expenseDto.setStatus( o.getStatus() );
 
         return expenseDto;
@@ -40,12 +40,12 @@ public class ExpenseMapperImpl implements ExpenseMapper {
 
         Expense.ExpenseBuilder expense = Expense.builder();
 
-        expense.id( dto.getId() );
-        expense.employeeId( dto.getEmployeeId() );
         expense.amount( dto.getAmount() );
-        expense.category( dto.getCategory() );
-        expense.receiptUrl( dto.getReceiptUrl() );
         expense.approvedBy( dto.getApprovedBy() );
+        expense.category( dto.getCategory() );
+        expense.employeeId( dto.getEmployeeId() );
+        expense.id( dto.getId() );
+        expense.receiptUrl( dto.getReceiptUrl() );
         expense.status( dto.getStatus() );
 
         return expense.build();

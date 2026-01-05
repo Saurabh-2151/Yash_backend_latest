@@ -6,8 +6,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:32:01+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:52+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 public class PermissionMapperImpl implements PermissionMapper {
 
@@ -19,14 +19,14 @@ public class PermissionMapperImpl implements PermissionMapper {
 
         Permission.PermissionBuilder permission = Permission.builder();
 
-        permission.id( dto.getId() );
-        permission.name( dto.getName() );
-        permission.displayName( dto.getDisplayName() );
-        permission.description( dto.getDescription() );
-        permission.module( dto.getModule() );
-        permission.resource( dto.getResource() );
         permission.action( dto.getAction() );
+        permission.description( dto.getDescription() );
+        permission.displayName( dto.getDisplayName() );
+        permission.id( dto.getId() );
         permission.isActive( dto.getIsActive() );
+        permission.module( dto.getModule() );
+        permission.name( dto.getName() );
+        permission.resource( dto.getResource() );
 
         return permission.build();
     }
@@ -39,14 +39,14 @@ public class PermissionMapperImpl implements PermissionMapper {
 
         PermissionDto.PermissionDtoBuilder permissionDto = PermissionDto.builder();
 
-        permissionDto.id( entity.getId() );
-        permissionDto.name( entity.getName() );
-        permissionDto.displayName( entity.getDisplayName() );
-        permissionDto.description( entity.getDescription() );
-        permissionDto.module( entity.getModule() );
-        permissionDto.resource( entity.getResource() );
         permissionDto.action( entity.getAction() );
+        permissionDto.description( entity.getDescription() );
+        permissionDto.displayName( entity.getDisplayName() );
+        permissionDto.id( entity.getId() );
         permissionDto.isActive( entity.getIsActive() );
+        permissionDto.module( entity.getModule() );
+        permissionDto.name( entity.getName() );
+        permissionDto.resource( entity.getResource() );
 
         return permissionDto.build();
     }

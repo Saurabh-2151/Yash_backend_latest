@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:56+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:54+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class LeaveRequestMapperImpl implements LeaveRequestMapper {
@@ -23,16 +23,16 @@ public class LeaveRequestMapperImpl implements LeaveRequestMapper {
         LeaveRequestDto leaveRequestDto = new LeaveRequestDto();
 
         leaveRequestDto.setEmployeeId( leaveRequestEmployeeId( leaveRequest ) );
+        leaveRequestDto.setFromDate( leaveRequest.getFromDate() );
         leaveRequestDto.setId( leaveRequest.getId() );
         if ( leaveRequest.getLeaveType() != null ) {
             leaveRequestDto.setLeaveType( leaveRequest.getLeaveType().name() );
         }
-        leaveRequestDto.setFromDate( leaveRequest.getFromDate() );
-        leaveRequestDto.setToDate( leaveRequest.getToDate() );
+        leaveRequestDto.setReason( leaveRequest.getReason() );
         if ( leaveRequest.getStatus() != null ) {
             leaveRequestDto.setStatus( leaveRequest.getStatus().name() );
         }
-        leaveRequestDto.setReason( leaveRequest.getReason() );
+        leaveRequestDto.setToDate( leaveRequest.getToDate() );
 
         return leaveRequestDto;
     }
@@ -45,16 +45,16 @@ public class LeaveRequestMapperImpl implements LeaveRequestMapper {
 
         LeaveRequest.LeaveRequestBuilder leaveRequest = LeaveRequest.builder();
 
+        leaveRequest.fromDate( dto.getFromDate() );
         leaveRequest.id( dto.getId() );
         if ( dto.getLeaveType() != null ) {
             leaveRequest.leaveType( Enum.valueOf( LeaveRequest.LeaveType.class, dto.getLeaveType() ) );
         }
-        leaveRequest.fromDate( dto.getFromDate() );
-        leaveRequest.toDate( dto.getToDate() );
+        leaveRequest.reason( dto.getReason() );
         if ( dto.getStatus() != null ) {
             leaveRequest.status( Enum.valueOf( LeaveRequest.Status.class, dto.getStatus() ) );
         }
-        leaveRequest.reason( dto.getReason() );
+        leaveRequest.toDate( dto.getToDate() );
 
         return leaveRequest.build();
     }

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:58+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:57+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class SupportTicketMapperImpl implements SupportTicketMapper {
@@ -23,15 +23,15 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
 
         supportTicketDto.setPriority( entity.getPriority() );
         supportTicketDto.setStatus( entity.getStatus() );
-        supportTicketDto.setId( entity.getId() );
-        supportTicketDto.setSubject( entity.getSubject() );
-        supportTicketDto.setDescription( entity.getDescription() );
+        supportTicketDto.setAssignedTo( entity.getAssignedTo() );
         supportTicketDto.setCategory( entity.getCategory() );
         supportTicketDto.setCreatedAt( entity.getCreatedAt() );
-        supportTicketDto.setUpdatedAt( entity.getUpdatedAt() );
         supportTicketDto.setCreatedBy( entity.getCreatedBy() );
-        supportTicketDto.setAssignedTo( entity.getAssignedTo() );
+        supportTicketDto.setDescription( entity.getDescription() );
+        supportTicketDto.setId( entity.getId() );
         supportTicketDto.setResolution( entity.getResolution() );
+        supportTicketDto.setSubject( entity.getSubject() );
+        supportTicketDto.setUpdatedAt( entity.getUpdatedAt() );
 
         return supportTicketDto;
     }
@@ -46,12 +46,12 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
 
         supportTicket.priority( dto.getPriority() );
         supportTicket.status( dto.getStatus() );
-        supportTicket.subject( dto.getSubject() );
-        supportTicket.description( dto.getDescription() );
+        supportTicket.assignedTo( dto.getAssignedTo() );
         supportTicket.category( dto.getCategory() );
         supportTicket.createdBy( dto.getCreatedBy() );
-        supportTicket.assignedTo( dto.getAssignedTo() );
+        supportTicket.description( dto.getDescription() );
         supportTicket.resolution( dto.getResolution() );
+        supportTicket.subject( dto.getSubject() );
 
         return supportTicket.build();
     }
@@ -64,14 +64,14 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
 
         entity.setPriority( dto.getPriority() );
         entity.setStatus( dto.getStatus() );
-        entity.setId( dto.getId() );
-        entity.setSubject( dto.getSubject() );
-        entity.setDescription( dto.getDescription() );
+        entity.setAssignedTo( dto.getAssignedTo() );
         entity.setCategory( dto.getCategory() );
         entity.setCreatedAt( dto.getCreatedAt() );
-        entity.setUpdatedAt( dto.getUpdatedAt() );
         entity.setCreatedBy( dto.getCreatedBy() );
-        entity.setAssignedTo( dto.getAssignedTo() );
+        entity.setDescription( dto.getDescription() );
+        entity.setId( dto.getId() );
         entity.setResolution( dto.getResolution() );
+        entity.setSubject( dto.getSubject() );
+        entity.setUpdatedAt( dto.getUpdatedAt() );
     }
 }

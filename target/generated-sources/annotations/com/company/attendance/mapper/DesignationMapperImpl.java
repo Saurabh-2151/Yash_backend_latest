@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:59+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:44+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class DesignationMapperImpl implements DesignationMapper {
@@ -21,15 +21,15 @@ public class DesignationMapperImpl implements DesignationMapper {
 
         Designation.DesignationBuilder designation = Designation.builder();
 
-        designation.id( dto.getId() );
-        designation.name( dto.getName() );
         designation.code( dto.getCode() );
-        designation.description( dto.getDescription() );
-        designation.level( dto.getLevel() );
-        designation.isActive( dto.getIsActive() );
         designation.createdAt( dto.getCreatedAt() );
-        designation.updatedAt( dto.getUpdatedAt() );
         designation.createdBy( dto.getCreatedBy() );
+        designation.description( dto.getDescription() );
+        designation.id( dto.getId() );
+        designation.isActive( dto.getIsActive() );
+        designation.level( dto.getLevel() );
+        designation.name( dto.getName() );
+        designation.updatedAt( dto.getUpdatedAt() );
         designation.updatedBy( dto.getUpdatedBy() );
 
         return designation.build();
@@ -43,15 +43,15 @@ public class DesignationMapperImpl implements DesignationMapper {
 
         DesignationDto.DesignationDtoBuilder designationDto = DesignationDto.builder();
 
-        designationDto.id( entity.getId() );
-        designationDto.name( entity.getName() );
         designationDto.code( entity.getCode() );
-        designationDto.description( entity.getDescription() );
-        designationDto.level( entity.getLevel() );
-        designationDto.isActive( entity.getIsActive() );
         designationDto.createdAt( entity.getCreatedAt() );
-        designationDto.updatedAt( entity.getUpdatedAt() );
         designationDto.createdBy( entity.getCreatedBy() );
+        designationDto.description( entity.getDescription() );
+        designationDto.id( entity.getId() );
+        designationDto.isActive( entity.getIsActive() );
+        designationDto.level( entity.getLevel() );
+        designationDto.name( entity.getName() );
+        designationDto.updatedAt( entity.getUpdatedAt() );
         designationDto.updatedBy( entity.getUpdatedBy() );
 
         return designationDto.build();

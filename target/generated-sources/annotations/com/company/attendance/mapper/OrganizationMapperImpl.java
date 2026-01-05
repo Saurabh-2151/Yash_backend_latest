@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:32:00+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:50+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class OrganizationMapperImpl implements OrganizationMapper {
@@ -23,30 +23,30 @@ public class OrganizationMapperImpl implements OrganizationMapper {
 
         Organization.OrganizationBuilder organization = Organization.builder();
 
-        organization.name( dto.getName() );
-        organization.code( dto.getCode() );
-        organization.description( dto.getDescription() );
-        organization.logo( dto.getLogo() );
         organization.address( dto.getAddress() );
         organization.city( dto.getCity() );
-        organization.state( dto.getState() );
-        organization.country( dto.getCountry() );
-        organization.pincode( dto.getPincode() );
+        organization.code( dto.getCode() );
         organization.contactEmail( dto.getContactEmail() );
         organization.contactPhone( dto.getContactPhone() );
-        organization.website( dto.getWebsite() );
-        organization.industry( dto.getIndustry() );
-        organization.timezone( dto.getTimezone() );
-        organization.dateFormat( dto.getDateFormat() );
-        organization.timeFormat( dto.getTimeFormat() );
+        organization.country( dto.getCountry() );
         organization.currency( dto.getCurrency() );
-        organization.taxId( dto.getTaxId() );
-        organization.registrationNumber( dto.getRegistrationNumber() );
-        organization.fiscalYearStart( dto.getFiscalYearStart() );
+        organization.dateFormat( dto.getDateFormat() );
+        organization.description( dto.getDescription() );
         organization.fiscalYearEnd( dto.getFiscalYearEnd() );
-        organization.primaryColor( dto.getPrimaryColor() );
-        organization.secondaryColor( dto.getSecondaryColor() );
+        organization.fiscalYearStart( dto.getFiscalYearStart() );
+        organization.industry( dto.getIndustry() );
         organization.isActive( dto.getIsActive() );
+        organization.logo( dto.getLogo() );
+        organization.name( dto.getName() );
+        organization.pincode( dto.getPincode() );
+        organization.primaryColor( dto.getPrimaryColor() );
+        organization.registrationNumber( dto.getRegistrationNumber() );
+        organization.secondaryColor( dto.getSecondaryColor() );
+        organization.state( dto.getState() );
+        organization.taxId( dto.getTaxId() );
+        organization.timeFormat( dto.getTimeFormat() );
+        organization.timezone( dto.getTimezone() );
+        organization.website( dto.getWebsite() );
 
         return organization.build();
     }
@@ -61,33 +61,33 @@ public class OrganizationMapperImpl implements OrganizationMapper {
 
         organizationDto.createdAt( entity.getCreatedAt() );
         organizationDto.updatedAt( entity.getUpdatedAt() );
-        organizationDto.id( entity.getId() );
         organizationDto.createdBy( entity.getCreatedBy() );
+        organizationDto.id( entity.getId() );
         organizationDto.updatedBy( entity.getUpdatedBy() );
-        organizationDto.name( entity.getName() );
-        organizationDto.code( entity.getCode() );
-        organizationDto.logo( entity.getLogo() );
         organizationDto.address( entity.getAddress() );
         organizationDto.city( entity.getCity() );
-        organizationDto.state( entity.getState() );
-        organizationDto.country( entity.getCountry() );
-        organizationDto.pincode( entity.getPincode() );
+        organizationDto.code( entity.getCode() );
         organizationDto.contactEmail( entity.getContactEmail() );
         organizationDto.contactPhone( entity.getContactPhone() );
-        organizationDto.website( entity.getWebsite() );
-        organizationDto.industry( entity.getIndustry() );
-        organizationDto.description( entity.getDescription() );
-        organizationDto.timezone( entity.getTimezone() );
-        organizationDto.dateFormat( entity.getDateFormat() );
-        organizationDto.timeFormat( entity.getTimeFormat() );
+        organizationDto.country( entity.getCountry() );
         organizationDto.currency( entity.getCurrency() );
-        organizationDto.taxId( entity.getTaxId() );
-        organizationDto.registrationNumber( entity.getRegistrationNumber() );
-        organizationDto.fiscalYearStart( entity.getFiscalYearStart() );
+        organizationDto.dateFormat( entity.getDateFormat() );
+        organizationDto.description( entity.getDescription() );
         organizationDto.fiscalYearEnd( entity.getFiscalYearEnd() );
-        organizationDto.primaryColor( entity.getPrimaryColor() );
-        organizationDto.secondaryColor( entity.getSecondaryColor() );
+        organizationDto.fiscalYearStart( entity.getFiscalYearStart() );
+        organizationDto.industry( entity.getIndustry() );
         organizationDto.isActive( entity.getIsActive() );
+        organizationDto.logo( entity.getLogo() );
+        organizationDto.name( entity.getName() );
+        organizationDto.pincode( entity.getPincode() );
+        organizationDto.primaryColor( entity.getPrimaryColor() );
+        organizationDto.registrationNumber( entity.getRegistrationNumber() );
+        organizationDto.secondaryColor( entity.getSecondaryColor() );
+        organizationDto.state( entity.getState() );
+        organizationDto.taxId( entity.getTaxId() );
+        organizationDto.timeFormat( entity.getTimeFormat() );
+        organizationDto.timezone( entity.getTimezone() );
+        organizationDto.website( entity.getWebsite() );
 
         return organizationDto.build();
     }
@@ -112,32 +112,14 @@ public class OrganizationMapperImpl implements OrganizationMapper {
             return;
         }
 
-        if ( dto.getName() != null ) {
-            entity.setName( dto.getName() );
-        }
-        if ( dto.getCode() != null ) {
-            entity.setCode( dto.getCode() );
-        }
-        if ( dto.getDescription() != null ) {
-            entity.setDescription( dto.getDescription() );
-        }
-        if ( dto.getLogo() != null ) {
-            entity.setLogo( dto.getLogo() );
-        }
         if ( dto.getAddress() != null ) {
             entity.setAddress( dto.getAddress() );
         }
         if ( dto.getCity() != null ) {
             entity.setCity( dto.getCity() );
         }
-        if ( dto.getState() != null ) {
-            entity.setState( dto.getState() );
-        }
-        if ( dto.getCountry() != null ) {
-            entity.setCountry( dto.getCountry() );
-        }
-        if ( dto.getPincode() != null ) {
-            entity.setPincode( dto.getPincode() );
+        if ( dto.getCode() != null ) {
+            entity.setCode( dto.getCode() );
         }
         if ( dto.getContactEmail() != null ) {
             entity.setContactEmail( dto.getContactEmail() );
@@ -145,44 +127,62 @@ public class OrganizationMapperImpl implements OrganizationMapper {
         if ( dto.getContactPhone() != null ) {
             entity.setContactPhone( dto.getContactPhone() );
         }
-        if ( dto.getWebsite() != null ) {
-            entity.setWebsite( dto.getWebsite() );
-        }
-        if ( dto.getIndustry() != null ) {
-            entity.setIndustry( dto.getIndustry() );
-        }
-        if ( dto.getTimezone() != null ) {
-            entity.setTimezone( dto.getTimezone() );
-        }
-        if ( dto.getDateFormat() != null ) {
-            entity.setDateFormat( dto.getDateFormat() );
-        }
-        if ( dto.getTimeFormat() != null ) {
-            entity.setTimeFormat( dto.getTimeFormat() );
+        if ( dto.getCountry() != null ) {
+            entity.setCountry( dto.getCountry() );
         }
         if ( dto.getCurrency() != null ) {
             entity.setCurrency( dto.getCurrency() );
         }
-        if ( dto.getTaxId() != null ) {
-            entity.setTaxId( dto.getTaxId() );
+        if ( dto.getDateFormat() != null ) {
+            entity.setDateFormat( dto.getDateFormat() );
         }
-        if ( dto.getRegistrationNumber() != null ) {
-            entity.setRegistrationNumber( dto.getRegistrationNumber() );
-        }
-        if ( dto.getFiscalYearStart() != null ) {
-            entity.setFiscalYearStart( dto.getFiscalYearStart() );
+        if ( dto.getDescription() != null ) {
+            entity.setDescription( dto.getDescription() );
         }
         if ( dto.getFiscalYearEnd() != null ) {
             entity.setFiscalYearEnd( dto.getFiscalYearEnd() );
         }
+        if ( dto.getFiscalYearStart() != null ) {
+            entity.setFiscalYearStart( dto.getFiscalYearStart() );
+        }
+        if ( dto.getIndustry() != null ) {
+            entity.setIndustry( dto.getIndustry() );
+        }
+        if ( dto.getIsActive() != null ) {
+            entity.setIsActive( dto.getIsActive() );
+        }
+        if ( dto.getLogo() != null ) {
+            entity.setLogo( dto.getLogo() );
+        }
+        if ( dto.getName() != null ) {
+            entity.setName( dto.getName() );
+        }
+        if ( dto.getPincode() != null ) {
+            entity.setPincode( dto.getPincode() );
+        }
         if ( dto.getPrimaryColor() != null ) {
             entity.setPrimaryColor( dto.getPrimaryColor() );
+        }
+        if ( dto.getRegistrationNumber() != null ) {
+            entity.setRegistrationNumber( dto.getRegistrationNumber() );
         }
         if ( dto.getSecondaryColor() != null ) {
             entity.setSecondaryColor( dto.getSecondaryColor() );
         }
-        if ( dto.getIsActive() != null ) {
-            entity.setIsActive( dto.getIsActive() );
+        if ( dto.getState() != null ) {
+            entity.setState( dto.getState() );
+        }
+        if ( dto.getTaxId() != null ) {
+            entity.setTaxId( dto.getTaxId() );
+        }
+        if ( dto.getTimeFormat() != null ) {
+            entity.setTimeFormat( dto.getTimeFormat() );
+        }
+        if ( dto.getTimezone() != null ) {
+            entity.setTimezone( dto.getTimezone() );
+        }
+        if ( dto.getWebsite() != null ) {
+            entity.setWebsite( dto.getWebsite() );
         }
     }
 }

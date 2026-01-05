@@ -45,6 +45,12 @@ public class EmployeeDto {
     private BigDecimal locationLng;
     private String employeeCode;
     private Boolean attendanceAllowed;
+    
+    // Additional fields
+    private String customDesignation;
+    private LocalDate dateOfBirth;
+    private String gender;
+    
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String createdBy;

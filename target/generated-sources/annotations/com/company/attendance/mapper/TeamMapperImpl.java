@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:57+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:53+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class TeamMapperImpl implements TeamMapper {
@@ -28,14 +28,14 @@ public class TeamMapperImpl implements TeamMapper {
         teamDto.teamLeadName( teamLeadToName( team.getTeamLead() ) );
         teamDto.memberCount( membersToCount( team.getMembers() ) );
         teamDto.parentTeamName( parentTeamToName( team.getParentTeam() ) );
-        teamDto.id( team.getId() );
-        teamDto.name( team.getName() );
-        teamDto.description( team.getDescription() );
-        teamDto.isActive( team.getIsActive() );
         teamDto.address( team.getAddress() );
         teamDto.city( team.getCity() );
-        teamDto.state( team.getState() );
+        teamDto.description( team.getDescription() );
+        teamDto.id( team.getId() );
+        teamDto.isActive( team.getIsActive() );
+        teamDto.name( team.getName() );
         teamDto.pincode( team.getPincode() );
+        teamDto.state( team.getState() );
 
         return teamDto.build();
     }
@@ -48,14 +48,14 @@ public class TeamMapperImpl implements TeamMapper {
 
         Team.TeamBuilder team = Team.builder();
 
-        team.id( dto.getId() );
-        team.name( dto.getName() );
         team.address( dto.getAddress() );
         team.city( dto.getCity() );
-        team.state( dto.getState() );
-        team.pincode( dto.getPincode() );
         team.description( dto.getDescription() );
+        team.id( dto.getId() );
         team.isActive( dto.getIsActive() );
+        team.name( dto.getName() );
+        team.pincode( dto.getPincode() );
+        team.state( dto.getState() );
 
         return team.build();
     }

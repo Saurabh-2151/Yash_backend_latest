@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:59+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:52+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class SettingsMapperImpl implements SettingsMapper {
@@ -21,12 +21,12 @@ public class SettingsMapperImpl implements SettingsMapper {
 
         SettingsDto settingsDto = new SettingsDto();
 
-        settingsDto.setId( entity.getId() );
         settingsDto.setCategory( entity.getCategory() );
-        settingsDto.setValue( entity.getValue() );
-        settingsDto.setDescription( entity.getDescription() );
         settingsDto.setDataType( entity.getDataType() );
+        settingsDto.setDescription( entity.getDescription() );
+        settingsDto.setId( entity.getId() );
         settingsDto.setIsEditable( entity.getIsEditable() );
+        settingsDto.setValue( entity.getValue() );
 
         return settingsDto;
     }
@@ -40,10 +40,10 @@ public class SettingsMapperImpl implements SettingsMapper {
         Settings.SettingsBuilder settings = Settings.builder();
 
         settings.category( dto.getCategory() );
-        settings.value( dto.getValue() );
-        settings.description( dto.getDescription() );
         settings.dataType( dto.getDataType() );
+        settings.description( dto.getDescription() );
         settings.isEditable( dto.getIsEditable() );
+        settings.value( dto.getValue() );
 
         return settings.build();
     }
@@ -55,9 +55,9 @@ public class SettingsMapperImpl implements SettingsMapper {
         }
 
         entity.setCategory( dto.getCategory() );
-        entity.setValue( dto.getValue() );
-        entity.setDescription( dto.getDescription() );
         entity.setDataType( dto.getDataType() );
+        entity.setDescription( dto.getDescription() );
         entity.setIsEditable( dto.getIsEditable() );
+        entity.setValue( dto.getValue() );
     }
 }

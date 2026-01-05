@@ -1,7 +1,20 @@
 package com.company.attendance.service;
 
 import com.company.attendance.entity.Employee;
+import com.company.attendance.entity.Role;
+import com.company.attendance.entity.Team;
+import com.company.attendance.entity.Designation;
+import com.company.attendance.entity.Organization;
+import com.company.attendance.entity.Department;
+import com.company.attendance.entity.Shift;
 import com.company.attendance.repository.EmployeeRepository;
+import com.company.attendance.repository.RoleRepository;
+import com.company.attendance.repository.TeamRepository;
+import com.company.attendance.repository.DesignationRepository;
+import com.company.attendance.repository.OrganizationRepository;
+import com.company.attendance.repository.DepartmentRepository;
+import com.company.attendance.repository.ShiftRepository;
+import com.company.attendance.dto.EmployeeDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +30,12 @@ import java.util.Optional;
 public class EmployeeService {
     
     private final EmployeeRepository employeeRepository;
+    private final RoleRepository roleRepository;
+    private final TeamRepository teamRepository;
+    private final DesignationRepository designationRepository;
+    private final OrganizationRepository organizationRepository;
+    private final DepartmentRepository departmentRepository;
+    private final ShiftRepository shiftRepository;
 
     public Employee save(Employee employee) {
         if (employee.getId() == null) {
@@ -26,8 +45,128 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    public Employee createFromDto(EmployeeDto dto) {
+        System.out.println("=== EMPLOYEE CREATE DEBUG ===");
+        System.out.println("Received DTO: " + dto);
+        
+        Employee employee = new Employee();
+        
+        // Set basic fields
+        employee.setFirstName(dto.getFirstName());
+        employee.setLastName(dto.getLastName());
+        employee.setEmail(dto.getEmail());
+        employee.setPhone(dto.getPhone());
+        employee.setEmployeeId(dto.getEmployeeId());
+        employee.setUserId(dto.getUserId());
+        employee.setEmployeeCode(dto.getEmployeeCode());
+        
+        // Set relationships from DTO IDs
+        if (dto.getRoleId() != null) {
+            Role role = roleRepository.findById(dto.getRoleId()).orElse(null);
+            System.out.println("Setting role: " + role);
+            employee.setRole(role);
+        }
+        
+        if (dto.getTeamId() != null) {
+            Team team = teamRepository.findById(dto.getTeamId()).orElse(null);
+            System.out.println("Setting team: " + team);
+            employee.setTeam(team);
+        }
+        
+        // Set designation (handle custom designation)
+        if (dto.getDesignationId() != null) {
+            Designation designation = designationRepository.findById(dto.getDesignationId()).orElse(null);
+            System.out.println("Setting designation: " + designation);
+            employee.setDesignation(designation);
+        }
+        
+        // Set custom designation if provided
+        if (dto.getCustomDesignation() != null && !dto.getCustomDesignation().trim().isEmpty()) {
+            System.out.println("Setting custom designation: " + dto.getCustomDesignation());
+            employee.setCustomDesignation(dto.getCustomDesignation());
+        }
+        
+        if (dto.getReportingManagerId() != null) {
+            Employee reportingManager = employeeRepository.findById(dto.getReportingManagerId()).orElse(null);
+            System.out.println("Setting reportingManager: " + reportingManager);
+            employee.setReportingManager(reportingManager);
+        }
+        
+        if (dto.getOrganizationId() != null) {
+            Organization organization = organizationRepository.findById(dto.getOrganizationId()).orElse(null);
+            System.out.println("Setting organization: " + organization);
+            employee.setOrganization(organization);
+        }
+        
+        if (dto.getDepartmentId() != null) {
+            Department department = departmentRepository.findById(dto.getDepartmentId()).orElse(null);
+            System.out.println("Setting department: " + department);
+            employee.setDepartment(department);
+        }
+        
+        if (dto.getShiftId() != null) {
+            Shift shift = shiftRepository.findById(dto.getShiftId()).orElse(null);
+            System.out.println("Setting shift: " + shift);
+            employee.setShift(shift);
+        }
+        
+        // Set status and other fields
+        if (dto.getStatus() != null) {
+            employee.setStatus(Employee.Status.valueOf(dto.getStatus()));
+        }
+        employee.setAttendanceAllowed(dto.getAttendanceAllowed());
+        employee.setHiredAt(dto.getHiredAt());
+        employee.setTerminationDate(dto.getTerminationDate());
+        
+        // Set additional fields
+        employee.setDateOfBirth(dto.getDateOfBirth());
+        employee.setGender(dto.getGender());
+        
+        // Handle profile image if provided as base64
+        if (dto.getProfileImageBase64() != null && !dto.getProfileImageBase64().trim().isEmpty()) {
+            try {
+                // Decode base64 and save image
+                String base64Data = dto.getProfileImageBase64();
+                if (base64Data.contains(",")) {
+                    base64Data = base64Data.split(",")[1]; // Remove data URL prefix
+                }
+                
+                byte[] imageBytes = java.util.Base64.getDecoder().decode(base64Data);
+                String fileName = System.currentTimeMillis() + "_profile.jpg";
+                String imageUrl = "/uploads/employees/" + fileName;
+                
+                // Create uploads directory if it doesn't exist
+                java.nio.file.Path uploadPath = java.nio.file.Paths.get("uploads/employees");
+                if (!java.nio.file.Files.exists(uploadPath)) {
+                    java.nio.file.Files.createDirectories(uploadPath);
+                }
+                
+                // Save image file
+                java.nio.file.Files.write(uploadPath.resolve(fileName), imageBytes);
+                
+                // Set image URL
+                employee.setProfileImageUrl(imageUrl);
+                System.out.println("Profile image saved: " + imageUrl);
+            } catch (Exception e) {
+                System.out.println("Error saving profile image: " + e.getMessage());
+                // Continue without image if there's an error
+            }
+        }
+        
+        // Set timestamps
+        employee.setCreatedAt(LocalDateTime.now());
+        employee.setUpdatedAt(LocalDateTime.now());
+        
+        System.out.println("Final employee before save: " + employee);
+        Employee saved = employeeRepository.save(employee);
+        System.out.println("Saved employee: " + saved);
+        System.out.println("=== END EMPLOYEE CREATE DEBUG ===");
+        
+        return saved;
+    }
+
     public Optional<Employee> findById(Long id) {
-        return employeeRepository.findById(id);
+        return employeeRepository.findByIdWithRelationships(id);
     }
 
     public Optional<Employee> findByUserId(String userId) {
@@ -47,7 +186,7 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAllWithRelationships();
     }
 
     public List<Employee> findByIsActive(Boolean isActive) {
@@ -59,90 +198,164 @@ public class EmployeeService {
     }
 
     @Transactional
-    public Employee update(Long id, Employee updated) {
+    public Employee update(Long id, EmployeeDto dto) {
         System.out.println("=== EMPLOYEE UPDATE DEBUG ===");
         System.out.println("Updating employee ID: " + id);
-        System.out.println("Updated data: " + updated);
+        System.out.println("Received DTO: " + dto);
         
         Employee existing = findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
         
         System.out.println("Existing data: " + existing);
         
-        // Update only the fields that exist in the Employee entity
-        // IMPORTANT: Never update created_at and created_by during update
-        if (updated.getFirstName() != null && !updated.getFirstName().equals(existing.getFirstName())) {
-            System.out.println("Updating firstName from '" + existing.getFirstName() + "' to '" + updated.getFirstName() + "'");
-            existing.setFirstName(updated.getFirstName());
+        // Update basic fields
+        if (dto.getFirstName() != null && !dto.getFirstName().equals(existing.getFirstName())) {
+            System.out.println("Updating firstName from '" + existing.getFirstName() + "' to '" + dto.getFirstName() + "'");
+            existing.setFirstName(dto.getFirstName());
         }
-        if (updated.getLastName() != null && !updated.getLastName().equals(existing.getLastName())) {
-            System.out.println("Updating lastName from '" + existing.getLastName() + "' to '" + updated.getLastName() + "'");
-            existing.setLastName(updated.getLastName());
+        if (dto.getLastName() != null && !dto.getLastName().equals(existing.getLastName())) {
+            System.out.println("Updating lastName from '" + existing.getLastName() + "' to '" + dto.getLastName() + "'");
+            existing.setLastName(dto.getLastName());
         }
-        if (updated.getEmail() != null && !updated.getEmail().equals(existing.getEmail())) {
-            System.out.println("Updating email from '" + existing.getEmail() + "' to '" + updated.getEmail() + "'");
-            existing.setEmail(updated.getEmail());
+        if (dto.getEmail() != null && !dto.getEmail().equals(existing.getEmail())) {
+            System.out.println("Updating email from '" + existing.getEmail() + "' to '" + dto.getEmail() + "'");
+            existing.setEmail(dto.getEmail());
         }
-        if (updated.getPhone() != null && !updated.getPhone().equals(existing.getPhone())) {
-            System.out.println("Updating phone from '" + existing.getPhone() + "' to '" + updated.getPhone() + "'");
-            existing.setPhone(updated.getPhone());
+        if (dto.getPhone() != null && !dto.getPhone().equals(existing.getPhone())) {
+            System.out.println("Updating phone from '" + existing.getPhone() + "' to '" + dto.getPhone() + "'");
+            existing.setPhone(dto.getPhone());
         }
-        if (updated.getEmployeeId() != null && !updated.getEmployeeId().equals(existing.getEmployeeId())) {
-            existing.setEmployeeId(updated.getEmployeeId());
+        if (dto.getEmployeeId() != null && !dto.getEmployeeId().equals(existing.getEmployeeId())) {
+            existing.setEmployeeId(dto.getEmployeeId());
         }
-        if (updated.getUserId() != null && !updated.getUserId().equals(existing.getUserId())) {
-            existing.setUserId(updated.getUserId());
+        if (dto.getUserId() != null && !dto.getUserId().equals(existing.getUserId())) {
+            existing.setUserId(dto.getUserId());
         }
-        if (updated.getEmployeeCode() != null && !updated.getEmployeeCode().equals(existing.getEmployeeCode())) {
-            existing.setEmployeeCode(updated.getEmployeeCode());
+        if (dto.getEmployeeCode() != null && !dto.getEmployeeCode().equals(existing.getEmployeeCode())) {
+            existing.setEmployeeCode(dto.getEmployeeCode());
         }
-        if (updated.getRole() != null && !updated.getRole().equals(existing.getRole())) {
-            existing.setRole(updated.getRole());
+        
+        // Update relationships from DTO IDs
+        if (dto.getRoleId() != null) {
+            Role role = roleRepository.findById(dto.getRoleId()).orElse(null);
+            if (role != null && !role.equals(existing.getRole())) {
+                System.out.println("Updating role from '" + existing.getRole() + "' to '" + role + "'");
+                existing.setRole(role);
+            }
         }
-        if (updated.getReportingManager() != null && !updated.getReportingManager().equals(existing.getReportingManager())) {
-            existing.setReportingManager(updated.getReportingManager());
+        
+        if (dto.getTeamId() != null) {
+            Team team = teamRepository.findById(dto.getTeamId()).orElse(null);
+            if (team != null && !team.equals(existing.getTeam())) {
+                System.out.println("Updating team from '" + existing.getTeam() + "' to '" + team + "'");
+                existing.setTeam(team);
+            }
         }
-        if (updated.getTeam() != null && !updated.getTeam().equals(existing.getTeam())) {
-            existing.setTeam(updated.getTeam());
+        
+        if (dto.getDesignationId() != null) {
+            Designation designation = designationRepository.findById(dto.getDesignationId()).orElse(null);
+            if (designation != null && !designation.equals(existing.getDesignation())) {
+                System.out.println("Updating designation from '" + existing.getDesignation() + "' to '" + designation + "'");
+                existing.setDesignation(designation);
+            }
         }
-        if (updated.getDepartment() != null && !updated.getDepartment().equals(existing.getDepartment())) {
-            existing.setDepartment(updated.getDepartment());
+        
+        if (dto.getReportingManagerId() != null) {
+            Employee reportingManager = employeeRepository.findById(dto.getReportingManagerId()).orElse(null);
+            if (reportingManager != null && !reportingManager.equals(existing.getReportingManager())) {
+                System.out.println("Updating reportingManager from '" + existing.getReportingManager() + "' to '" + reportingManager + "'");
+                existing.setReportingManager(reportingManager);
+            }
         }
-        if (updated.getDesignation() != null && !updated.getDesignation().equals(existing.getDesignation())) {
-            existing.setDesignation(updated.getDesignation());
+        
+        if (dto.getOrganizationId() != null) {
+            Organization organization = organizationRepository.findById(dto.getOrganizationId()).orElse(null);
+            if (organization != null && !organization.equals(existing.getOrganization())) {
+                System.out.println("Updating organization from '" + existing.getOrganization() + "' to '" + organization + "'");
+                existing.setOrganization(organization);
+            }
         }
-        if (updated.getStatus() != null && !updated.getStatus().equals(existing.getStatus())) {
-            existing.setStatus(updated.getStatus());
+        
+        if (dto.getDepartmentId() != null) {
+            Department department = departmentRepository.findById(dto.getDepartmentId()).orElse(null);
+            if (department != null && !department.equals(existing.getDepartment())) {
+                System.out.println("Updating department from '" + existing.getDepartment() + "' to '" + department + "'");
+                existing.setDepartment(department);
+            }
         }
-        if (updated.getAttendanceAllowed() != null && !updated.getAttendanceAllowed().equals(existing.getAttendanceAllowed())) {
-            existing.setAttendanceAllowed(updated.getAttendanceAllowed());
+        
+        if (dto.getShiftId() != null) {
+            Shift shift = shiftRepository.findById(dto.getShiftId()).orElse(null);
+            if (shift != null && !shift.equals(existing.getShift())) {
+                System.out.println("Updating shift from '" + existing.getShift() + "' to '" + shift + "'");
+                existing.setShift(shift);
+            }
         }
-        if (updated.getHiredAt() != null && !updated.getHiredAt().equals(existing.getHiredAt())) {
-            existing.setHiredAt(updated.getHiredAt());
+        
+        if (dto.getStatus() != null && !dto.getStatus().equals(existing.getStatus().name())) {
+            System.out.println("Updating status from '" + existing.getStatus() + "' to '" + dto.getStatus() + "'");
+            existing.setStatus(Employee.Status.valueOf(dto.getStatus()));
         }
-        if (updated.getTerminationDate() != null && !updated.getTerminationDate().equals(existing.getTerminationDate())) {
-            existing.setTerminationDate(updated.getTerminationDate());
+        if (dto.getAttendanceAllowed() != null && !dto.getAttendanceAllowed().equals(existing.getAttendanceAllowed())) {
+            System.out.println("Updating attendanceAllowed from '" + existing.getAttendanceAllowed() + "' to '" + dto.getAttendanceAllowed() + "'");
+            existing.setAttendanceAllowed(dto.getAttendanceAllowed());
         }
-        if (updated.getPasswordHash() != null && !updated.getPasswordHash().equals(existing.getPasswordHash())) {
-            existing.setPasswordHash(updated.getPasswordHash());
+        if (dto.getHiredAt() != null && !dto.getHiredAt().equals(existing.getHiredAt())) {
+            System.out.println("Updating hiredAt from '" + existing.getHiredAt() + "' to '" + dto.getHiredAt() + "'");
+            existing.setHiredAt(dto.getHiredAt());
         }
-        if (updated.getOrganization() != null && !updated.getOrganization().equals(existing.getOrganization())) {
-            existing.setOrganization(updated.getOrganization());
+        if (dto.getTerminationDate() != null && !dto.getTerminationDate().equals(existing.getTerminationDate())) {
+            System.out.println("Updating terminationDate from '" + existing.getTerminationDate() + "' to '" + dto.getTerminationDate() + "'");
+            existing.setTerminationDate(dto.getTerminationDate());
         }
-        if (updated.getShift() != null && !updated.getShift().equals(existing.getShift())) {
-            existing.setShift(updated.getShift());
+        
+        // Update custom designation
+        if (dto.getCustomDesignation() != null && !dto.getCustomDesignation().equals(existing.getCustomDesignation())) {
+            System.out.println("Updating custom designation from '" + existing.getCustomDesignation() + "' to '" + dto.getCustomDesignation() + "'");
+            existing.setCustomDesignation(dto.getCustomDesignation());
         }
-        if (updated.getLocationLat() != null && !updated.getLocationLat().equals(existing.getLocationLat())) {
-            existing.setLocationLat(updated.getLocationLat());
+        
+        // Update date of birth
+        if (dto.getDateOfBirth() != null && !dto.getDateOfBirth().equals(existing.getDateOfBirth())) {
+            System.out.println("Updating date of birth from '" + existing.getDateOfBirth() + "' to '" + dto.getDateOfBirth() + "'");
+            existing.setDateOfBirth(dto.getDateOfBirth());
         }
-        if (updated.getLocationLng() != null && !updated.getLocationLng().equals(existing.getLocationLng())) {
-            existing.setLocationLng(updated.getLocationLng());
+        
+        // Update gender
+        if (dto.getGender() != null && !dto.getGender().equals(existing.getGender())) {
+            System.out.println("Updating gender from '" + existing.getGender() + "' to '" + dto.getGender() + "'");
+            existing.setGender(dto.getGender());
         }
-        if (updated.getSubadminId() != null && !updated.getSubadminId().equals(existing.getSubadminId())) {
-            existing.setSubadminId(updated.getSubadminId());
-        }
-        if (updated.getProfileImageUrl() != null && !updated.getProfileImageUrl().equals(existing.getProfileImageUrl())) {
-            existing.setProfileImageUrl(updated.getProfileImageUrl());
+        
+        // Handle profile image update if provided as base64
+        if (dto.getProfileImageBase64() != null && !dto.getProfileImageBase64().trim().isEmpty()) {
+            try {
+                // Decode base64 and save image
+                String base64Data = dto.getProfileImageBase64();
+                if (base64Data.contains(",")) {
+                    base64Data = base64Data.split(",")[1]; // Remove data URL prefix
+                }
+                
+                byte[] imageBytes = java.util.Base64.getDecoder().decode(base64Data);
+                String fileName = System.currentTimeMillis() + "_profile.jpg";
+                String imageUrl = "/uploads/employees/" + fileName;
+                
+                // Create uploads directory if it doesn't exist
+                java.nio.file.Path uploadPath = java.nio.file.Paths.get("uploads/employees");
+                if (!java.nio.file.Files.exists(uploadPath)) {
+                    java.nio.file.Files.createDirectories(uploadPath);
+                }
+                
+                // Save image file
+                java.nio.file.Files.write(uploadPath.resolve(fileName), imageBytes);
+                
+                // Set image URL
+                existing.setProfileImageUrl(imageUrl);
+                System.out.println("Profile image updated: " + imageUrl);
+            } catch (Exception e) {
+                System.out.println("Error updating profile image: " + e.getMessage());
+                // Continue without image if there's an error
+            }
         }
         
         // IMPORTANT: Only update updated_at, never touch created_at and created_by
@@ -166,5 +379,31 @@ public class EmployeeService {
 
     public boolean existsByEmployeeId(String employeeId) {
         return employeeRepository.existsByEmployeeId(employeeId);
+    }
+    
+    public String generateNextEmployeeId() {
+        // Find the highest numeric employee ID
+        List<Employee> employees = employeeRepository.findAll();
+        int maxId = 0;
+        
+        for (Employee emp : employees) {
+            if (emp.getEmployeeId() != null) {
+                try {
+                    // Extract numeric part from employee ID
+                    String numericPart = emp.getEmployeeId().replaceAll("[^0-9]", "");
+                    if (!numericPart.isEmpty()) {
+                        int id = Integer.parseInt(numericPart);
+                        if (id > maxId) {
+                            maxId = id;
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    // Skip non-numeric IDs
+                }
+            }
+        }
+        
+        // Generate next ID (start from 1 if no existing IDs)
+        return String.valueOf(maxId + 1);
     }
 }

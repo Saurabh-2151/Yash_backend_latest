@@ -6,8 +6,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:32:01+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:51+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 public class HolidayMapperImpl implements HolidayMapper {
 
@@ -19,16 +19,16 @@ public class HolidayMapperImpl implements HolidayMapper {
 
         Holiday.HolidayBuilder holiday = Holiday.builder();
 
-        holiday.id( dto.getId() );
-        holiday.name( dto.getName() );
-        holiday.description( dto.getDescription() );
-        holiday.date( dto.getDate() );
-        holiday.type( dto.getType() );
-        holiday.isOptional( dto.getIsOptional() );
-        holiday.isActive( dto.getIsActive() );
         holiday.createdAt( dto.getCreatedAt() );
-        holiday.updatedAt( dto.getUpdatedAt() );
         holiday.createdBy( dto.getCreatedBy() );
+        holiday.date( dto.getDate() );
+        holiday.description( dto.getDescription() );
+        holiday.id( dto.getId() );
+        holiday.isActive( dto.getIsActive() );
+        holiday.isOptional( dto.getIsOptional() );
+        holiday.name( dto.getName() );
+        holiday.type( dto.getType() );
+        holiday.updatedAt( dto.getUpdatedAt() );
         holiday.updatedBy( dto.getUpdatedBy() );
 
         return holiday.build();
@@ -42,16 +42,16 @@ public class HolidayMapperImpl implements HolidayMapper {
 
         HolidayDto.HolidayDtoBuilder holidayDto = HolidayDto.builder();
 
-        holidayDto.id( entity.getId() );
-        holidayDto.name( entity.getName() );
-        holidayDto.description( entity.getDescription() );
-        holidayDto.date( entity.getDate() );
-        holidayDto.type( entity.getType() );
-        holidayDto.isOptional( entity.getIsOptional() );
-        holidayDto.isActive( entity.getIsActive() );
         holidayDto.createdAt( entity.getCreatedAt() );
-        holidayDto.updatedAt( entity.getUpdatedAt() );
         holidayDto.createdBy( entity.getCreatedBy() );
+        holidayDto.date( entity.getDate() );
+        holidayDto.description( entity.getDescription() );
+        holidayDto.id( entity.getId() );
+        holidayDto.isActive( entity.getIsActive() );
+        holidayDto.isOptional( entity.getIsOptional() );
+        holidayDto.name( entity.getName() );
+        holidayDto.type( entity.getType() );
+        holidayDto.updatedAt( entity.getUpdatedAt() );
         holidayDto.updatedBy( entity.getUpdatedBy() );
 
         return holidayDto.build();

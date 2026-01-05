@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:32:01+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:47+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class CaseMapperImpl implements CaseMapper {
@@ -23,17 +23,17 @@ public class CaseMapperImpl implements CaseMapper {
 
         CaseDto caseDto = new CaseDto();
 
-        caseDto.setId( caseEntity.getId() );
         caseDto.setCaseNumber( caseEntity.getCaseNumber() );
-        caseDto.setTitle( caseEntity.getTitle() );
+        caseDto.setCreatedAt( caseEntity.getCreatedAt() );
         caseDto.setDescription( caseEntity.getDescription() );
-        if ( caseEntity.getStatus() != null ) {
-            caseDto.setStatus( caseEntity.getStatus().name() );
-        }
+        caseDto.setId( caseEntity.getId() );
         if ( caseEntity.getPriority() != null ) {
             caseDto.setPriority( caseEntity.getPriority().name() );
         }
-        caseDto.setCreatedAt( caseEntity.getCreatedAt() );
+        if ( caseEntity.getStatus() != null ) {
+            caseDto.setStatus( caseEntity.getStatus().name() );
+        }
+        caseDto.setTitle( caseEntity.getTitle() );
         caseDto.setUpdatedAt( caseEntity.getUpdatedAt() );
 
         return caseDto;
@@ -47,17 +47,17 @@ public class CaseMapperImpl implements CaseMapper {
 
         Case.CaseBuilder case1 = Case.builder();
 
-        case1.id( caseDto.getId() );
         case1.caseNumber( caseDto.getCaseNumber() );
-        case1.title( caseDto.getTitle() );
+        case1.createdAt( caseDto.getCreatedAt() );
         case1.description( caseDto.getDescription() );
-        if ( caseDto.getStatus() != null ) {
-            case1.status( Enum.valueOf( Case.CaseStatus.class, caseDto.getStatus() ) );
-        }
+        case1.id( caseDto.getId() );
         if ( caseDto.getPriority() != null ) {
             case1.priority( Enum.valueOf( Case.Priority.class, caseDto.getPriority() ) );
         }
-        case1.createdAt( caseDto.getCreatedAt() );
+        if ( caseDto.getStatus() != null ) {
+            case1.status( Enum.valueOf( Case.CaseStatus.class, caseDto.getStatus() ) );
+        }
+        case1.title( caseDto.getTitle() );
         case1.updatedAt( caseDto.getUpdatedAt() );
 
         return case1.build();
@@ -69,23 +69,23 @@ public class CaseMapperImpl implements CaseMapper {
             return;
         }
 
-        caseEntity.setId( caseDto.getId() );
         caseEntity.setCaseNumber( caseDto.getCaseNumber() );
-        caseEntity.setTitle( caseDto.getTitle() );
+        caseEntity.setCreatedAt( caseDto.getCreatedAt() );
         caseEntity.setDescription( caseDto.getDescription() );
-        if ( caseDto.getStatus() != null ) {
-            caseEntity.setStatus( Enum.valueOf( Case.CaseStatus.class, caseDto.getStatus() ) );
-        }
-        else {
-            caseEntity.setStatus( null );
-        }
+        caseEntity.setId( caseDto.getId() );
         if ( caseDto.getPriority() != null ) {
             caseEntity.setPriority( Enum.valueOf( Case.Priority.class, caseDto.getPriority() ) );
         }
         else {
             caseEntity.setPriority( null );
         }
-        caseEntity.setCreatedAt( caseDto.getCreatedAt() );
+        if ( caseDto.getStatus() != null ) {
+            caseEntity.setStatus( Enum.valueOf( Case.CaseStatus.class, caseDto.getStatus() ) );
+        }
+        else {
+            caseEntity.setStatus( null );
+        }
+        caseEntity.setTitle( caseDto.getTitle() );
         caseEntity.setUpdatedAt( caseDto.getUpdatedAt() );
     }
 

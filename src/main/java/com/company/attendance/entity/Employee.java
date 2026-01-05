@@ -90,6 +90,11 @@ public class Employee {
     private String employeeCode;
     private Boolean attendanceAllowed;
 
+    // Additional fields
+    private String customDesignation;
+    private LocalDate dateOfBirth;
+    private String gender;
+
     // Auditing
     private String createdBy;
     private LocalDateTime createdAt;

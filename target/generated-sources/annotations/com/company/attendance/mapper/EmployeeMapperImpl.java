@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:57+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:56+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class EmployeeMapperImpl implements EmployeeMapper {
@@ -27,24 +27,27 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 
         Employee.EmployeeBuilder employee = Employee.builder();
 
-        employee.id( dto.getId() );
-        employee.userId( dto.getUserId() );
+        employee.attendanceAllowed( dto.getAttendanceAllowed() );
+        employee.customDesignation( dto.getCustomDesignation() );
+        employee.dateOfBirth( dto.getDateOfBirth() );
+        employee.email( dto.getEmail() );
+        employee.employeeCode( dto.getEmployeeCode() );
         employee.employeeId( dto.getEmployeeId() );
         employee.firstName( dto.getFirstName() );
+        employee.gender( dto.getGender() );
+        employee.hiredAt( dto.getHiredAt() );
+        employee.id( dto.getId() );
         employee.lastName( dto.getLastName() );
-        employee.email( dto.getEmail() );
+        employee.locationLat( dto.getLocationLat() );
+        employee.locationLng( dto.getLocationLng() );
         employee.phone( dto.getPhone() );
-        employee.subadminId( dto.getSubadminId() );
+        employee.profileImageUrl( dto.getProfileImageUrl() );
         if ( dto.getStatus() != null ) {
             employee.status( Enum.valueOf( Employee.Status.class, dto.getStatus() ) );
         }
-        employee.profileImageUrl( dto.getProfileImageUrl() );
-        employee.hiredAt( dto.getHiredAt() );
+        employee.subadminId( dto.getSubadminId() );
         employee.terminationDate( dto.getTerminationDate() );
-        employee.locationLat( dto.getLocationLat() );
-        employee.locationLng( dto.getLocationLng() );
-        employee.employeeCode( dto.getEmployeeCode() );
-        employee.attendanceAllowed( dto.getAttendanceAllowed() );
+        employee.userId( dto.getUserId() );
 
         return employee.build();
     }
@@ -70,24 +73,27 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employeeDto.departmentName( entityDepartmentName( entity ) );
         employeeDto.shiftId( entityShiftId( entity ) );
         employeeDto.shiftName( entityShiftName( entity ) );
-        employeeDto.id( entity.getId() );
-        employeeDto.userId( entity.getUserId() );
+        employeeDto.attendanceAllowed( entity.getAttendanceAllowed() );
+        employeeDto.customDesignation( entity.getCustomDesignation() );
+        employeeDto.dateOfBirth( entity.getDateOfBirth() );
+        employeeDto.email( entity.getEmail() );
+        employeeDto.employeeCode( entity.getEmployeeCode() );
         employeeDto.employeeId( entity.getEmployeeId() );
         employeeDto.firstName( entity.getFirstName() );
+        employeeDto.gender( entity.getGender() );
+        employeeDto.hiredAt( entity.getHiredAt() );
+        employeeDto.id( entity.getId() );
         employeeDto.lastName( entity.getLastName() );
-        employeeDto.email( entity.getEmail() );
+        employeeDto.locationLat( entity.getLocationLat() );
+        employeeDto.locationLng( entity.getLocationLng() );
         employeeDto.phone( entity.getPhone() );
-        employeeDto.subadminId( entity.getSubadminId() );
+        employeeDto.profileImageUrl( entity.getProfileImageUrl() );
         if ( entity.getStatus() != null ) {
             employeeDto.status( entity.getStatus().name() );
         }
-        employeeDto.profileImageUrl( entity.getProfileImageUrl() );
-        employeeDto.hiredAt( entity.getHiredAt() );
+        employeeDto.subadminId( entity.getSubadminId() );
         employeeDto.terminationDate( entity.getTerminationDate() );
-        employeeDto.locationLat( entity.getLocationLat() );
-        employeeDto.locationLng( entity.getLocationLng() );
-        employeeDto.employeeCode( entity.getEmployeeCode() );
-        employeeDto.attendanceAllowed( entity.getAttendanceAllowed() );
+        employeeDto.userId( entity.getUserId() );
 
         employeeDto.reportingManagerName( entity.getReportingManager() != null ? entity.getReportingManager().getFirstName() + " " + entity.getReportingManager().getLastName() : null );
 
@@ -100,26 +106,29 @@ public class EmployeeMapperImpl implements EmployeeMapper {
             return;
         }
 
-        entity.setFirstName( dto.getFirstName() );
-        entity.setLastName( dto.getLastName() );
-        entity.setEmail( dto.getEmail() );
-        entity.setPhone( dto.getPhone() );
-        entity.setSubadminId( dto.getSubadminId() );
+        entity.setAttendanceAllowed( dto.getAttendanceAllowed() );
+        entity.setCreatedBy( dto.getCreatedBy() );
+        entity.setCustomDesignation( dto.getCustomDesignation() );
+        entity.setDateOfBirth( dto.getDateOfBirth() );
+        entity.setEmployeeCode( dto.getEmployeeCode() );
+        entity.setGender( dto.getGender() );
+        entity.setHiredAt( dto.getHiredAt() );
+        entity.setLocationLat( dto.getLocationLat() );
+        entity.setLocationLng( dto.getLocationLng() );
+        entity.setProfileImageUrl( dto.getProfileImageUrl() );
         if ( dto.getStatus() != null ) {
             entity.setStatus( Enum.valueOf( Employee.Status.class, dto.getStatus() ) );
         }
         else {
             entity.setStatus( null );
         }
-        entity.setProfileImageUrl( dto.getProfileImageUrl() );
-        entity.setHiredAt( dto.getHiredAt() );
+        entity.setSubadminId( dto.getSubadminId() );
         entity.setTerminationDate( dto.getTerminationDate() );
-        entity.setLocationLat( dto.getLocationLat() );
-        entity.setLocationLng( dto.getLocationLng() );
-        entity.setEmployeeCode( dto.getEmployeeCode() );
-        entity.setAttendanceAllowed( dto.getAttendanceAllowed() );
-        entity.setCreatedBy( dto.getCreatedBy() );
         entity.setUpdatedBy( dto.getUpdatedBy() );
+        entity.setFirstName( dto.getFirstName() );
+        entity.setLastName( dto.getLastName() );
+        entity.setEmail( dto.getEmail() );
+        entity.setPhone( dto.getPhone() );
     }
 
     private Long entityRoleId(Employee employee) {

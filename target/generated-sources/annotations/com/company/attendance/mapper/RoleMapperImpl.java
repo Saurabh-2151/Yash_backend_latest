@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:57+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:44+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class RoleMapperImpl implements RoleMapper {
@@ -21,12 +21,12 @@ public class RoleMapperImpl implements RoleMapper {
 
         Role.RoleBuilder role = Role.builder();
 
-        role.id( dto.getId() );
-        role.name( dto.getName() );
         role.description( dto.getDescription() );
         role.displayName( dto.getDisplayName() );
+        role.id( dto.getId() );
         role.isActive( dto.getIsActive() );
         role.isDefault( dto.getIsDefault() );
+        role.name( dto.getName() );
 
         return role.build();
     }
@@ -39,12 +39,12 @@ public class RoleMapperImpl implements RoleMapper {
 
         RoleDto.RoleDtoBuilder roleDto = RoleDto.builder();
 
-        roleDto.id( entity.getId() );
-        roleDto.name( entity.getName() );
         roleDto.description( entity.getDescription() );
         roleDto.displayName( entity.getDisplayName() );
+        roleDto.id( entity.getId() );
         roleDto.isActive( entity.getIsActive() );
         roleDto.isDefault( entity.getIsDefault() );
+        roleDto.name( entity.getName() );
 
         return roleDto.build();
     }

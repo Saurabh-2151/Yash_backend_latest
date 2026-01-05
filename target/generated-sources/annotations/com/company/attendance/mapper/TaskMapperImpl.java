@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:32:01+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:54+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class TaskMapperImpl implements TaskMapper {
@@ -21,15 +21,15 @@ public class TaskMapperImpl implements TaskMapper {
 
         TaskDto taskDto = new TaskDto();
 
-        taskDto.setId( task.getId() );
-        taskDto.setTitle( task.getTitle() );
-        taskDto.setDescription( task.getDescription() );
-        taskDto.setAssignedTo( task.getAssignedTo() );
         taskDto.setAssignedBy( task.getAssignedBy() );
-        taskDto.setDueDate( task.getDueDate() );
-        taskDto.setStatus( task.getStatus() );
-        taskDto.setPriority( task.getPriority() );
+        taskDto.setAssignedTo( task.getAssignedTo() );
         taskDto.setCreatedAt( task.getCreatedAt() );
+        taskDto.setDescription( task.getDescription() );
+        taskDto.setDueDate( task.getDueDate() );
+        taskDto.setId( task.getId() );
+        taskDto.setPriority( task.getPriority() );
+        taskDto.setStatus( task.getStatus() );
+        taskDto.setTitle( task.getTitle() );
 
         return taskDto;
     }
@@ -42,15 +42,15 @@ public class TaskMapperImpl implements TaskMapper {
 
         Task.TaskBuilder task = Task.builder();
 
-        task.id( dto.getId() );
-        task.title( dto.getTitle() );
-        task.description( dto.getDescription() );
-        task.assignedTo( dto.getAssignedTo() );
         task.assignedBy( dto.getAssignedBy() );
-        task.dueDate( dto.getDueDate() );
-        task.status( dto.getStatus() );
-        task.priority( dto.getPriority() );
+        task.assignedTo( dto.getAssignedTo() );
         task.createdAt( dto.getCreatedAt() );
+        task.description( dto.getDescription() );
+        task.dueDate( dto.getDueDate() );
+        task.id( dto.getId() );
+        task.priority( dto.getPriority() );
+        task.status( dto.getStatus() );
+        task.title( dto.getTitle() );
 
         return task.build();
     }

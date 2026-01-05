@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:58+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:46+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class AnnouncementMapperImpl implements AnnouncementMapper {
@@ -21,17 +21,17 @@ public class AnnouncementMapperImpl implements AnnouncementMapper {
 
         Announcement.AnnouncementBuilder announcement = Announcement.builder();
 
-        announcement.id( dto.getId() );
-        announcement.title( dto.getTitle() );
         announcement.content( dto.getContent() );
-        announcement.type( dto.getType() );
-        announcement.publishFrom( dto.getPublishFrom() );
-        announcement.publishTo( dto.getPublishTo() );
+        announcement.createdAt( dto.getCreatedAt() );
+        announcement.createdBy( dto.getCreatedBy() );
+        announcement.id( dto.getId() );
         announcement.isActive( dto.getIsActive() );
         announcement.isPinned( dto.getIsPinned() );
-        announcement.createdAt( dto.getCreatedAt() );
+        announcement.publishFrom( dto.getPublishFrom() );
+        announcement.publishTo( dto.getPublishTo() );
+        announcement.title( dto.getTitle() );
+        announcement.type( dto.getType() );
         announcement.updatedAt( dto.getUpdatedAt() );
-        announcement.createdBy( dto.getCreatedBy() );
         announcement.updatedBy( dto.getUpdatedBy() );
 
         return announcement.build();
@@ -45,17 +45,17 @@ public class AnnouncementMapperImpl implements AnnouncementMapper {
 
         AnnouncementDto.AnnouncementDtoBuilder announcementDto = AnnouncementDto.builder();
 
-        announcementDto.id( entity.getId() );
-        announcementDto.title( entity.getTitle() );
         announcementDto.content( entity.getContent() );
-        announcementDto.type( entity.getType() );
-        announcementDto.publishFrom( entity.getPublishFrom() );
-        announcementDto.publishTo( entity.getPublishTo() );
+        announcementDto.createdAt( entity.getCreatedAt() );
+        announcementDto.createdBy( entity.getCreatedBy() );
+        announcementDto.id( entity.getId() );
         announcementDto.isActive( entity.getIsActive() );
         announcementDto.isPinned( entity.getIsPinned() );
-        announcementDto.createdAt( entity.getCreatedAt() );
+        announcementDto.publishFrom( entity.getPublishFrom() );
+        announcementDto.publishTo( entity.getPublishTo() );
+        announcementDto.title( entity.getTitle() );
+        announcementDto.type( entity.getType() );
         announcementDto.updatedAt( entity.getUpdatedAt() );
-        announcementDto.createdBy( entity.getCreatedBy() );
         announcementDto.updatedBy( entity.getUpdatedBy() );
 
         return announcementDto.build();
@@ -67,17 +67,17 @@ public class AnnouncementMapperImpl implements AnnouncementMapper {
             return;
         }
 
+        entity.setContent( dto.getContent() );
+        entity.setCreatedBy( dto.getCreatedBy() );
+        entity.setIsActive( dto.getIsActive() );
+        entity.setIsPinned( dto.getIsPinned() );
+        entity.setPublishFrom( dto.getPublishFrom() );
+        entity.setPublishTo( dto.getPublishTo() );
+        entity.setType( dto.getType() );
+        entity.setUpdatedBy( dto.getUpdatedBy() );
         entity.setId( dto.getId() );
         entity.setTitle( dto.getTitle() );
         entity.setCreatedAt( dto.getCreatedAt() );
         entity.setUpdatedAt( dto.getUpdatedAt() );
-        entity.setContent( dto.getContent() );
-        entity.setType( dto.getType() );
-        entity.setPublishFrom( dto.getPublishFrom() );
-        entity.setPublishTo( dto.getPublishTo() );
-        entity.setIsActive( dto.getIsActive() );
-        entity.setIsPinned( dto.getIsPinned() );
-        entity.setCreatedBy( dto.getCreatedBy() );
-        entity.setUpdatedBy( dto.getUpdatedBy() );
     }
 }

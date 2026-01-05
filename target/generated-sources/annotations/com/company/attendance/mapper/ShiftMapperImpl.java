@@ -8,8 +8,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:58+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:53+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 public class ShiftMapperImpl implements ShiftMapper {
 
@@ -21,21 +21,21 @@ public class ShiftMapperImpl implements ShiftMapper {
 
         Shift.ShiftBuilder shift = Shift.builder();
 
-        shift.id( dto.getId() );
-        shift.name( dto.getName() );
-        shift.code( dto.getCode() );
-        shift.startTime( dto.getStartTime() );
-        shift.endTime( dto.getEndTime() );
-        shift.breakStartTime( dto.getBreakStartTime() );
         shift.breakEndTime( dto.getBreakEndTime() );
-        shift.gracePeriodInMinutes( dto.getGracePeriodInMinutes() );
-        shift.overtimeThresholdInMinutes( dto.getOvertimeThresholdInMinutes() );
-        shift.isOverTimeAllowed( dto.getIsOverTimeAllowed() );
-        shift.isActive( dto.getIsActive() );
-        shift.description( dto.getDescription() );
+        shift.breakStartTime( dto.getBreakStartTime() );
+        shift.code( dto.getCode() );
         shift.createdAt( dto.getCreatedAt() );
-        shift.updatedAt( dto.getUpdatedAt() );
         shift.createdBy( dto.getCreatedBy() );
+        shift.description( dto.getDescription() );
+        shift.endTime( dto.getEndTime() );
+        shift.gracePeriodInMinutes( dto.getGracePeriodInMinutes() );
+        shift.id( dto.getId() );
+        shift.isActive( dto.getIsActive() );
+        shift.isOverTimeAllowed( dto.getIsOverTimeAllowed() );
+        shift.name( dto.getName() );
+        shift.overtimeThresholdInMinutes( dto.getOvertimeThresholdInMinutes() );
+        shift.startTime( dto.getStartTime() );
+        shift.updatedAt( dto.getUpdatedAt() );
         shift.updatedBy( dto.getUpdatedBy() );
 
         return shift.build();
@@ -49,21 +49,21 @@ public class ShiftMapperImpl implements ShiftMapper {
 
         ShiftDto.ShiftDtoBuilder shiftDto = ShiftDto.builder();
 
-        shiftDto.id( entity.getId() );
-        shiftDto.name( entity.getName() );
-        shiftDto.code( entity.getCode() );
-        shiftDto.startTime( entity.getStartTime() );
-        shiftDto.endTime( entity.getEndTime() );
-        shiftDto.breakStartTime( entity.getBreakStartTime() );
         shiftDto.breakEndTime( entity.getBreakEndTime() );
-        shiftDto.gracePeriodInMinutes( entity.getGracePeriodInMinutes() );
-        shiftDto.overtimeThresholdInMinutes( entity.getOvertimeThresholdInMinutes() );
-        shiftDto.isOverTimeAllowed( entity.getIsOverTimeAllowed() );
-        shiftDto.isActive( entity.getIsActive() );
-        shiftDto.description( entity.getDescription() );
+        shiftDto.breakStartTime( entity.getBreakStartTime() );
+        shiftDto.code( entity.getCode() );
         shiftDto.createdAt( entity.getCreatedAt() );
-        shiftDto.updatedAt( entity.getUpdatedAt() );
         shiftDto.createdBy( entity.getCreatedBy() );
+        shiftDto.description( entity.getDescription() );
+        shiftDto.endTime( entity.getEndTime() );
+        shiftDto.gracePeriodInMinutes( entity.getGracePeriodInMinutes() );
+        shiftDto.id( entity.getId() );
+        shiftDto.isActive( entity.getIsActive() );
+        shiftDto.isOverTimeAllowed( entity.getIsOverTimeAllowed() );
+        shiftDto.name( entity.getName() );
+        shiftDto.overtimeThresholdInMinutes( entity.getOvertimeThresholdInMinutes() );
+        shiftDto.startTime( entity.getStartTime() );
+        shiftDto.updatedAt( entity.getUpdatedAt() );
         shiftDto.updatedBy( entity.getUpdatedBy() );
 
         return shiftDto.build();

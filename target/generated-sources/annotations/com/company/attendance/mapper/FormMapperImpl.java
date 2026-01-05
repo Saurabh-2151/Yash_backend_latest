@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:58+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:44+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class FormMapperImpl implements FormMapper {
@@ -21,11 +21,11 @@ public class FormMapperImpl implements FormMapper {
 
         FormDto formDto = new FormDto();
 
+        formDto.setCreatedBy( form.getCreatedBy() );
         formDto.setId( form.getId() );
+        formDto.setIsActive( form.getIsActive() );
         formDto.setName( form.getName() );
         formDto.setSchema( form.getSchema() );
-        formDto.setCreatedBy( form.getCreatedBy() );
-        formDto.setIsActive( form.getIsActive() );
 
         return formDto;
     }
@@ -38,11 +38,11 @@ public class FormMapperImpl implements FormMapper {
 
         Form.FormBuilder form = Form.builder();
 
+        form.createdBy( dto.getCreatedBy() );
         form.id( dto.getId() );
+        form.isActive( dto.getIsActive() );
         form.name( dto.getName() );
         form.schema( dto.getSchema() );
-        form.createdBy( dto.getCreatedBy() );
-        form.isActive( dto.getIsActive() );
 
         return form.build();
     }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-03T13:31:59+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-01-05T11:42:48+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class ClientMapperImpl implements ClientMapper {
@@ -23,15 +23,15 @@ public class ClientMapperImpl implements ClientMapper {
 
         ClientDto clientDto = new ClientDto();
 
+        clientDto.setAddress( client.getAddress() );
+        clientDto.setContactPhone( client.getContactPhone() );
+        clientDto.setCreatedAt( client.getCreatedAt() );
+        clientDto.setId( client.getId() );
+        clientDto.setIsActive( client.getIsActive() );
+        clientDto.setNotes( client.getNotes() );
+        clientDto.setUpdatedAt( client.getUpdatedAt() );
         clientDto.setName( client.getName() );
         clientDto.setEmail( client.getEmail() );
-        clientDto.setId( client.getId() );
-        clientDto.setContactPhone( client.getContactPhone() );
-        clientDto.setAddress( client.getAddress() );
-        clientDto.setNotes( client.getNotes() );
-        clientDto.setIsActive( client.getIsActive() );
-        clientDto.setCreatedAt( client.getCreatedAt() );
-        clientDto.setUpdatedAt( client.getUpdatedAt() );
 
         return clientDto;
     }
@@ -44,14 +44,14 @@ public class ClientMapperImpl implements ClientMapper {
 
         Client.ClientBuilder client = Client.builder();
 
-        client.id( clientDto.getId() );
-        client.name( clientDto.getName() );
-        client.email( clientDto.getEmail() );
-        client.contactPhone( clientDto.getContactPhone() );
         client.address( clientDto.getAddress() );
-        client.notes( clientDto.getNotes() );
-        client.isActive( clientDto.getIsActive() );
+        client.contactPhone( clientDto.getContactPhone() );
         client.createdAt( clientDto.getCreatedAt() );
+        client.email( clientDto.getEmail() );
+        client.id( clientDto.getId() );
+        client.isActive( clientDto.getIsActive() );
+        client.name( clientDto.getName() );
+        client.notes( clientDto.getNotes() );
         client.updatedAt( clientDto.getUpdatedAt() );
 
         return client.build();
@@ -63,14 +63,14 @@ public class ClientMapperImpl implements ClientMapper {
             return;
         }
 
-        client.setId( clientDto.getId() );
-        client.setName( clientDto.getName() );
-        client.setEmail( clientDto.getEmail() );
-        client.setContactPhone( clientDto.getContactPhone() );
         client.setAddress( clientDto.getAddress() );
-        client.setNotes( clientDto.getNotes() );
-        client.setIsActive( clientDto.getIsActive() );
+        client.setContactPhone( clientDto.getContactPhone() );
         client.setCreatedAt( clientDto.getCreatedAt() );
+        client.setEmail( clientDto.getEmail() );
+        client.setId( clientDto.getId() );
+        client.setIsActive( clientDto.getIsActive() );
+        client.setName( clientDto.getName() );
+        client.setNotes( clientDto.getNotes() );
         client.setUpdatedAt( clientDto.getUpdatedAt() );
     }
 
